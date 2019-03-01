@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-toolbar app>
+    <v-toolbar dark color="pink darken-2" app>
       <v-toolbar-title class="headline">
         <span class="px-2">fujimusic</span>
         <span class="px-2">ギタースクール</span>

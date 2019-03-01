@@ -29,12 +29,20 @@ export default {
     return {
       cards: [
         {
-          src: "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg",
-          message: "test1"
+          src: require("../../assets/album/album1.jpg"),
+          message: "2017/4/9 Tommy BirthdayLive"
         },
         {
-          src: "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg",
-          message: "test2"
+          src: require("../../assets/album/album2.jpg"),
+          message: "2017/5/7 fujimusic concert"
+        },
+        {
+          src: require("../../assets/album/album3.jpg"),
+          message: "2017/5/7 fujimusic concert"
+        },
+        {
+          src: require("../../assets/album/album4.jpg"),
+          message: "2017/5/7 fujimusic concert"
         }
       ]
     };
