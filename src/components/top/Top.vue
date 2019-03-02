@@ -9,9 +9,9 @@
       <v-container>
         <v-flex class="pa-3" xs12>
           <v-card class="mb-5 elevation-0 transparent">
-            <v-card-title class="justify-center">
+            <v-card-title class="mb-3 justify-center">
               <div>
-                <h3 class="display-1">
+                <h3 class="title-head">
                   <v-icon color="red" size="45">sentiment_satisfied_alt</v-icon>
                   {{topTitle}}
                 </h3>
@@ -31,9 +31,9 @@
         </v-flex>
         <v-flex class="pa-2" xs12>
           <v-card class="elevation-0 transparent mb-5">
-            <v-card-title class="justify-center">
+            <v-card-title class="mb-3 justify-center">
               <div>
-                <h3 class="display-1">
+                <h3 class="title-head">
                   <v-icon class="mr-2" color="red" size="45">audiotrack</v-icon>当教室の特徴
                 </h3>
               </div>
@@ -91,7 +91,9 @@
                         <v-icon class="pa-2">done_outline</v-icon>発表会
                       </div>
                     </v-card-title>
-                    <v-card-text class="article">年に2回の発表会で日頃の成果を披露できます。また、他の生徒と交流が楽します。BBQ等のイベントも行います。</v-card-text>
+                    <v-card-text
+                      class="article"
+                    >年に2回の発表会で日頃の成果を披露できます。また、他の生徒と交流が楽します。BBQ等のイベントも行います。</v-card-text>
                   </v-card>
                 </v-flex>
               </v-layout>
@@ -100,9 +102,9 @@
         </v-flex>
         <v-flex class="pa-2" xs12>
           <v-card class="elevation-0 transparent">
-            <v-card-title class="justify-center">
+            <v-card-title class="mb-3 justify-center">
               <div>
-                <h3 class="display-1">
+                <h3 class="title-head">
                   <v-icon class="mr-2" color="red" size="45">account_circle</v-icon>講師紹介
                 </h3>
               </div>
@@ -136,7 +138,8 @@ export default {
         { src: "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg" }
       ],
       teacherImage: require("../../assets/top/teacher.jpg"),
-      teacherProfile: "名前：丸山 幸雄(まるやま ゆきお)\n好きな音楽:ああああああ\nご挨拶:こんばんは"
+      teacherProfile:
+        "名前：丸山 幸雄(まるやま ゆきお)\n好きな音楽:ああああああ\nご挨拶:こんばんは"
     };
   }
 };
@@ -147,6 +150,12 @@ export default {
   font-size: 17px;
   line-height: 35px;
   background-color: #fafafa;
+}
+.title-head {
+  letter-spacing: 4px;
+  font-size: 34px;
+  line-height: 35px;
+  font-weight: 200;
 }
 .goodpoints {
   letter-spacing: 4px;

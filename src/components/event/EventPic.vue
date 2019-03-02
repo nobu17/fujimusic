@@ -1,19 +1,30 @@
 <template>
   <div>
-    <v-layout justify-center wrap>
-      <v-container fluid grid-list-md>
-        <v-layout row wrap>
-          <v-flex v-for="card in cards" :key="card.title" xs12 md4>
-            <v-hover>
-              <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 2}`">
-                <v-img :src="card.src" height="200px" @click="openImage(card.message, card.src)"></v-img>
-                <v-card-actions>{{ card.message }}</v-card-actions>
-              </v-card>
-            </v-hover>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-layout>
+    <v-container>
+      <v-layout justify-center wrap>
+        <v-flex xs12>
+          <h3 class="title-head text-md-center mb-4">
+            <v-icon class="mr-3" color="red" size="45">portrait</v-icon>イベント
+          </h3>
+        </v-flex>
+        <v-flex xs12>
+          <h3 class="t-title stripe ma-3">案内</h3>
+          <p class="article ml-5 multiLine">フジーミュージックのイベント時の写真を紹介します。画像をクリックすると拡大します。</p>
+        </v-flex>
+        <v-container fluid grid-list-md>
+          <v-layout row wrap>
+            <v-flex v-for="card in cards" :key="card.title" xs12 md6>
+              <v-hover>
+                <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 2}`">
+                  <v-img :src="card.src" height="200px" @click="openImage(card.message, card.src)"></v-img>
+                  <v-card-actions>{{ card.message }}</v-card-actions>
+                </v-card>
+              </v-hover>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </v-layout>
+    </v-container>
     <ImageDialog ref="imageDialog"/>
   </div>
 </template>
@@ -56,4 +67,34 @@ export default {
 </script>
 
 <style>
+.article {
+  letter-spacing: 4px;
+  font-size: 16px;
+  line-height: 35px;
+  background-color: #fafafa;
+}
+.t-title {
+  letter-spacing: 4px;
+  font-size: 30px;
+  font-weight: 200;
+}
+.stripe {
+  position: relative;
+  padding: -0.3em;
+}
+.stripe:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 7px;
+  background: repeating-linear-gradient(
+    -45deg,
+    gold,
+    gold 2px,
+    white 2px,
+    white 4px
+  );
+}
 </style>
