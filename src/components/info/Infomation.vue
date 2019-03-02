@@ -3,19 +3,26 @@
     <v-container>
       <v-layout wrap>
         <v-flex xs12>
-          <h3 class="title-head text-md-center mb-4"><v-icon class="mr-3" color="red" size="45">info</v-icon>お知らせ</h3>
+          <h3 class="title-head text-md-center text-xs-center mb-4">
+            <v-icon class="mr-3" color="red" size="45">info</v-icon>お知らせ
+          </h3>
         </v-flex>
         <v-flex class="cardroot mb-2 xs12 md12" v-for="(info,i) in infoList" :key="i">
           <v-card class="cardroot" color="elevation-0 transparent">
             <v-card-title>
               <div>
-                <h3 class="mr-4 mb-2 title-head">
+                <h3
+                  :class="{'title-head_xs mb-3': $vuetify.breakpoint.smAndDown, 'title-head mb-4': $vuetify.breakpoint.mdAndUp}"
+                >
                   <div>
-                    <v-icon color="red" size="40">calendar_today</v-icon>
+                    <v-icon class="hidden-sm-and-down" color="red" size="40">calendar_today</v-icon>
+                    <v-icon class="hidden-md-and-up" color="red" size="25">calendar_today</v-icon>
                     {{info.date}}&nbsp;&nbsp;{{info.title}}
                   </div>
                 </h3>
-                <div class="article">{{info.text}}</div>
+                <div
+                  :class="{'article_xs': $vuetify.breakpoint.smAndDown, 'article': $vuetify.breakpoint.mdAndUp}"
+                >{{info.text}}</div>
               </div>
             </v-card-title>
           </v-card>
@@ -51,14 +58,27 @@ export default {
   line-height: 35px;
   background-color: #fafafa;
 }
+.article_xs {
+  letter-spacing: 2px;
+  font-size: 15px;
+  line-height: 25px;
+  background-color: #fafafa;
+}
+
 .title-head {
   letter-spacing: 4px;
   font-size: 30px;
   line-height: 35px;
   font-weight: 300;
 }
+.title-head_xs {
+  letter-spacing: 2px;
+  font-size: 20px;
+  line-height: 25px;
+  font-weight: 150;
+}
 .cardroot {
-  border-left: solid 8px #FF8A80;
+  border-left: solid 8px #ff8a80;
 }
 .stripe {
   position: relative;

@@ -3,56 +3,63 @@
     <v-container>
       <v-layout wrap>
         <v-flex xs12>
-          <h3 class="title-head text-md-center mb-4">
+          <h3 class="title-head text-md-center text-xs-center mb-4">
             <v-icon class="mr-3" color="red" size="45">attach_money</v-icon>料金案内
           </h3>
         </v-flex>
         <v-flex xs12>
           <h3 class="t-title stripe ma-3">入会案内</h3>
-          <p class="article ml-5">
+          <p
+            :class="{'article_xs ml-3 mb-3': $vuetify.breakpoint.smAndDown, 'article ml-5 mb-4': $vuetify.breakpoint.mdAndUp}"
+          >
             まずは体験レッスンで教室の様子をお確かめ下さい。
             ギターをお持ちでない方は練習用ギターを
             お貸しいたしますので お気軽にお申し付けください。
           </p>
-          <p class="article ml-5">
-            メール
+          <p
+            :class="{'article_xs ml-3 mb-3': $vuetify.breakpoint.smAndDown, 'article ml-5 mb-4': $vuetify.breakpoint.mdAndUp}"
+          >
+            メール：
             fujimusic2011@gmail.com
           </p>
-          <p class="article ml-5">
-            電話
+          <p
+            :class="{'article_xs ml-3 mb-3': $vuetify.breakpoint.smAndDown, 'article ml-5 mb-4': $vuetify.breakpoint.mdAndUp}"
+          >
+            電話：
             090-8471-5227 丸山幸男
           </p>
-          <p class="article ml-5">※メールでお申し込みの方は下記をご記入ください</p>
-          <ul class="article ml-5" type="disc">
+          <p
+            :class="{'article_xs ml-3 mb-3': $vuetify.breakpoint.smAndDown, 'article ml-5 mb-4': $vuetify.breakpoint.mdAndUp}"
+          >※メールでお申し込みの方は下記をご記入ください</p>
+          <ul
+            :class="{'article_xs ml-3 mb-3': $vuetify.breakpoint.smAndDown, 'article ml-5 mb-4': $vuetify.breakpoint.mdAndUp}"
+            type="disc"
+          >
             <li>お名前、年齢、性別</li>
             <li>教室名（三島、清水）</li>
             <li>アコースティックギターかエレキギター</li>
             <li>電話番号またはメールアドレス</li>
           </ul>
         </v-flex>
-        <v-flex xs12>
-          <h3 class="t-title stripe ma-3">入会金</h3>
-          <h3
-            class="t-title ml-5"
-          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{entryFee}}</h3>
+        <v-flex xs12 md4>
+          <h3 class="t-title stripe ma-3 text-md-center text-xs-center">入会金</h3>
+          <h3 class="t-title text-md-right text-xs-right mr-3">{{entryFee}}</h3>
         </v-flex>
-        <v-flex xs12>
-          <h3 class="t-title stripe ma-3">月会費</h3>
-          <h3
-            class="t-title ml-5"
-          >一般&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{monthlyFeeNormal}}</h3>
-          <h3
-            class="t-title ml-5"
-          >高校生&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{monthlyFeeHighSchool}}</h3>
-          <h3 class="t-title ml-5">中学生以下&nbsp;&nbsp;{{monthlyFeeChild}}</h3>
-          <p class="ml-5 mt-3 article">※１ヵ月に３回のレッスンになります。1回のレッスンは1時間です</p>
+        <v-flex xs12 md4>
+          <h3 class="t-title stripe ma-3 text-md-center text-xs-center">月会費</h3>
+          <h3 class="t-title text-md-right text-xs-right mr-3">一般 {{monthlyFeeNormal}}</h3>
+          <h3 class="t-title text-md-right text-xs-right mr-3">高校生 {{monthlyFeeHighSchool}}</h3>
+          <h3 class="t-title text-md-right text-xs-right mr-3">中学生以下 {{monthlyFeeChild}}</h3>
+          <p
+            :class="{'article_xs ml-3 mb-3': $vuetify.breakpoint.smAndDown, 'article ml-5 mb-4': $vuetify.breakpoint.mdAndUp}"
+          >※１ヵ月に３回のレッスンになります。1回のレッスンは1時間です</p>
         </v-flex>
-        <v-flex xs12>
-          <h3 class="t-title stripe ma-3">個人レッスン</h3>
-          <h3
-            class="t-title ml-5"
-          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{personalLessonFee}}</h3>
-          <p class="ml-5 mt-3 article">※1回毎の料金です。予約制です。</p>
+        <v-flex xs12 md4>
+          <h3 class="t-title stripe ma-3 text-md-center text-xs">個人レッスン</h3>
+          <h3 class="t-title text-md-right text-xs-right mr-3">{{personalLessonFee}}</h3>
+          <p
+            :class="{'article_xs ml-3 mb-3': $vuetify.breakpoint.smAndDown, 'article ml-5 mb-4': $vuetify.breakpoint.mdAndUp}"
+          >※1回毎の料金です。予約制です。</p>
         </v-flex>
       </v-layout>
     </v-container>
@@ -60,6 +67,9 @@
 </template>
 <script>
 export default {
+  updated() {
+    $("#app").scrollTop(0);
+  },
   data() {
     return {
       entryFee: "￥5,000",
@@ -76,17 +86,24 @@ export default {
 };
 </script>
 <style>
-.article {
-  letter-spacing: 4px;
-  font-size: 16px;
-  line-height: 35px;
+.article_xs {
+  letter-spacing: 2px;
+  font-size: 15px;
+  line-height: 25px;
   background-color: #fafafa;
 }
+
 .title-head {
   letter-spacing: 4px;
-  font-size: 34px;
+  font-size: 30px;
   line-height: 35px;
-  font-weight: 200;
+  font-weight: 300;
+}
+.title-head_xs {
+  letter-spacing: 2px;
+  font-size: 20px;
+  line-height: 25px;
+  font-weight: 150;
 }
 .t-title {
   letter-spacing: 4px;

@@ -2,7 +2,7 @@
   <v-layout row justify-center>
     <v-dialog v-model="dialog" max-width="800" content content-class="centered-dialog">
       <v-card>
-        <v-img :src="imageSrc" height="500px"></v-img>
+        <v-img :src="imageSrc" aspect-ratio="2"></v-img>
         <v-card-actions>{{ message }}</v-card-actions>
       </v-card>
     </v-dialog>

@@ -4,13 +4,16 @@
       <v-layout wrap>
         <v-flex v-for="(room,i) in classRooms" :key="i" xs12>
           <v-flex xs12>
-            <h3 class="title-head text-md-center mb-4">
+            <h3 class="title-head text-md-center text-xs-center mb-4">
               <v-icon class="mr-3" color="red" size="45">queue_music</v-icon>
               {{room.name}}
             </h3>
           </v-flex>
           <v-flex xs12>
-            <v-carousel>
+            <v-carousel class="hidden-sm-and-down">
+              <v-carousel-item v-for="(item,i) in room.images" :key="i" :src="item.src"></v-carousel-item>
+            </v-carousel>
+            <v-carousel class="hidden-md-and-up" height="250">
               <v-carousel-item v-for="(item,i) in room.images" :key="i" :src="item.src"></v-carousel-item>
             </v-carousel>
           </v-flex>

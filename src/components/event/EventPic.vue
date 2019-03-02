@@ -3,7 +3,7 @@
     <v-container>
       <v-layout justify-center wrap>
         <v-flex xs12>
-          <h3 class="title-head text-md-center mb-4">
+          <h3 class="title-head text-md-center text-xs-center mb-4">
             <v-icon class="mr-3" color="red" size="45">portrait</v-icon>イベント
           </h3>
         </v-flex>
@@ -16,7 +16,7 @@
             <v-flex v-for="card in cards" :key="card.title" xs12 md6>
               <v-hover>
                 <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 2}`">
-                  <v-img :src="card.src" height="200px" @click="openImage(card.message, card.src)"></v-img>
+                  <v-img :src="card.src" aspect-ratio="2" @click="openImage(card.message, card.src)"></v-img>
                   <v-card-actions>{{ card.message }}</v-card-actions>
                 </v-card>
               </v-hover>

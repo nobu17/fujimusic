@@ -35,7 +35,10 @@ const router = new VueRouter({
       path: "/event",
       component: EventPic
     },    
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  }
 });
 
 router.beforeEach((to, from, next) => {
