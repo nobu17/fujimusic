@@ -8,7 +8,7 @@
           </h3>
         </v-flex>
         <v-flex xs12>
-          <h3 class="t-title stripe ma-3">入会案内</h3>
+          <h3 class="t-title stripe ma-3 text-md-center text-xs-center">入会案内</h3>
           <p
             :class="{'article_xs ml-3 mb-3': $vuetify.breakpoint.smAndDown, 'article ml-5 mb-4': $vuetify.breakpoint.mdAndUp}"
           >

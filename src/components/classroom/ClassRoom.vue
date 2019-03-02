@@ -18,20 +18,21 @@
             </v-carousel>
           </v-flex>
           <v-flex xs12>
-            <h3 class="t-title stripe ma-3">案内</h3>
-            <p class="article ml-5 multiLine">{{room.description}}</p>
+            <h3 class="t-title stripe ma-3 text-md-center text-xs-center">案内</h3>
+            <p class="article ml-5 mb-5 multiLine">{{room.description}}</p>
           </v-flex>
           <v-flex xs12>
-            <h3 class="t-title stripe ma-3">時間</h3>
-            <ul class="article ml-5" type="disc">
-              <li
-                v-for="(time,i) in room.lessonTimes"
-                :key="i"
-              >{{time.weekOfDay + " " + time.start + "～" + time.end }}</li>
-            </ul>
+            <h3 class="t-title stripe ma-3 text-md-center text-xs-center xs12 md6">時間</h3>
+            <div class="text-md-center text-xs-center mb-5">
+            <p
+              class="time-list text-md-center text-xs-center"
+              v-for="(time,i) in room.lessonTimes"
+              :key="i"
+            >{{time.weekOfDay + " " + time.start + "～" + time.end }}</p>
+            </div>
           </v-flex>
           <v-flex xs12>
-            <h3 class="t-title stripe ma-3">練習場所</h3>
+            <h3 class="t-title stripe ma-3 text-md-center text-xs-center xs12">練習場所</h3>
             <p class="article ml-5">{{room.locationInfo.address}}</p>
             <p class="article ml-5">{{room.locationInfo.etc}}</p>
             <v-flex class xs12>
@@ -96,6 +97,12 @@ export default {
   letter-spacing: 4px;
   font-size: 16px;
   line-height: 35px;
+  background-color: #fafafa;
+}
+.time-list {
+  letter-spacing: 4px;
+  font-size: 16px;
+  line-height: 20px;
   background-color: #fafafa;
 }
 .multiLine {
