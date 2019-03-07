@@ -5,6 +5,8 @@ import Infomation from "./pages/info";
 import Price from "./pages/price";
 import ClassRoom from "./pages/classroom";
 import EventPic from "./pages/event";
+import Students from "./pages/students";
+
 
 Vue.use(VueRouter);
 // VueRouterインスタンスを生成する
@@ -34,7 +36,11 @@ const router = new VueRouter({
     {
       path: "/event",
       component: EventPic
-    },    
+    },
+    {
+      path: "/students",
+      component: Students
+    }
   ]
 });
 
