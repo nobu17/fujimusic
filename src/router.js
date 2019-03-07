@@ -1,10 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Top from "./components/top/Top";
-import Infomation from "./components/info/Infomation";
-import Price from "./components/price/Price";
-import ClassRoom from "./components/classroom/ClassRoom";
-import EventPic from "./components/event/EventPic";
+import Top from "./pages/root";
+import Infomation from "./pages/info";
+import Price from "./pages/price";
+import ClassRoom from "./pages/classroom";
+import EventPic from "./pages/event";
 
 Vue.use(VueRouter);
 // VueRouterインスタンスを生成する
@@ -35,10 +35,7 @@ const router = new VueRouter({
       path: "/event",
       component: EventPic
     },    
-  ],
-  scrollBehavior (to, from, savedPosition) {
-    return { x: 0, y: 0 }
-  }
+  ]
 });
 
 router.beforeEach((to, from, next) => {

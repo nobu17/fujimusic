@@ -61,7 +61,7 @@ export default {
             { weekOfDay: "日曜日", start: "09:00", end: "12:00" }
           ],
           images: [
-            { src: require("../../assets/classroom/mishima1.jpg") },
+            { src: require("../assets/classroom/mishima1.jpg") },
             { src: "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg" }
           ],
           locationInfo: {
@@ -77,7 +77,7 @@ export default {
             "清水教室は月に3回、2人1組のレッスンになります。\n1回、1時間です。個人レッスンを御希望の方は相談ください。",
           lessonTimes: [{ weekOfDay: "日曜日", start: "15:00", end: "20:00" }],
           images: [
-            { src: require("../../assets/classroom/shimizu1.jpg") },
+            { src: require("../assets/classroom/shimizu1.jpg") },
             { src: "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg" }
           ],
           locationInfo: {

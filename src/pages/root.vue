@@ -136,16 +136,16 @@ export default {
   data() {
     return {
       topTitle: "ご挨拶",
-      topTitleImage: require("../../assets/top/topimage.jpg"),
+      topTitleImage: require("../assets/top/topimage.jpg"),
       topMessage:
         "fujimusic(フジミュージック）ギター教室には、小学生から60代、70代、の幅広い年代の生徒がいます。\nアットホームで気軽に楽しめ、そして、音楽好きな仲間を見つけることができる、そんな教室を目指しています。\nやってみたいけど、踏み出せない、そんなひとはいませんか？\nぜひ一緒に音楽を楽しみましょう！\n\n静岡県東部(沼津市,三島市,長泉町,清水町,裾野市)と、静岡県中部(静岡市清水区,葵区,駿河区)で活動をしています。",
       topImages: [
         { src: "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg" },
         { src: "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg" }
       ],
-      teacherImage: require("../../assets/top/teacher.jpg"),
+      teacherImage: require("../assets/top/teacher.jpg"),
       teacherProfile:
-        "名前：丸山 幸雄(まるやま ゆきお)\n好きな音楽:ああああああ\nご挨拶:こんばんは"
+        "名前：丸山 幸雄(まるやま ゆきお)\nご挨拶:フジミュージック代表の丸山です。三島、清水教室のどちらの生徒も楽しみながらレッスンをしています。定期的な発表の場もあるので、飽きずにレッスンを続けることができます。フジミュージックに参加して一緒に楽しみましょう。"
     };
   }
 };

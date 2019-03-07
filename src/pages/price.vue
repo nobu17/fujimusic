@@ -68,7 +68,7 @@
 <script>
 export default {
   updated() {
-    $("#app").scrollTop(0);
+    ("#app").scrollTop(0);
   },
   data() {
     return {
