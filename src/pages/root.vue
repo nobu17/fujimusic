@@ -140,8 +140,8 @@ export default {
       topMessage:
         "fujimusic(フジミュージック）ギター教室には、小学生から60代、70代、の幅広い年代の生徒がいます。\nアットホームで気軽に楽しめ、そして、音楽好きな仲間を見つけることができる、そんな教室を目指しています。\nやってみたいけど、踏み出せない、そんなひとはいませんか？\nぜひ一緒に音楽を楽しみましょう！\n\n静岡県東部(沼津市,三島市,長泉町,清水町,裾野市)と、静岡県中部(静岡市清水区,葵区,駿河区)で活動をしています。",
       topImages: [
-        { src: "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg" },
-        { src: "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg" }
+        { src: require("../assets/top/slide0.png") },
+        { src: require("../assets/top/slide1.jpg") },
       ],
       teacherImage: require("../assets/top/teacher.jpg"),
       teacherProfile:
