@@ -32,7 +32,9 @@
             <v-icon class="mr-3" color="red" size="45">calendar_today</v-icon>予定表
           </h3>
           <v-flex class xs12>
-            <div class="gcal ml-5" v-html="calendarUrl"></div>
+            <div class="gc-wrap">
+              <div class="g-calendar" v-html="calendarUrl"></div>
+            </div>
           </v-flex>
         </v-flex>
       </v-layout>
@@ -53,7 +55,7 @@ export default {
         }
       ],
       calendarUrl:
-        '<iframe src="https://calendar.google.com/calendar/embed?src=i2g9m5u0sqojeuqocemfc4thi0%40group.calendar.google.com&ctz=Asia%2FTokyo" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>'
+        '<iframe src="https://calendar.google.com/calendar/embed?src=i2g9m5u0sqojeuqocemfc4thi0%40group.calendar.google.com&ctz=Asia%2FTokyo&showPrint=0&showTabs=0" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>'
     };
   }
 };
@@ -108,21 +110,29 @@ export default {
   );
 }
 
-.gcal {
-  position: relative;
-  padding-bottom: 56.25%;
-  padding-top: 30px;
-  height: 0;
-  overflow: hidden;
+.gc-wrap {
+  max-width: 800px;
+  margin: 3% auto;
 }
 
-.gcal iframe,
-.gcal object,
-.gcal embed {
+.g-calendar {
+  position: relative;
+  overflow: hidden;
+  height: 0;
+  padding-bottom: 70%;
+}
+
+.g-calendar iframe {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 80%;
+  height: 100%;
+}
+
+@media screen and (max-width: 767px) {
+  .g-calendar {
+    padding-bottom: 90%;
+  }
 }
 </style>
