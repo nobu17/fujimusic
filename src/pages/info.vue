@@ -27,6 +27,14 @@
             </v-card-title>
           </v-card>
         </v-flex>
+        <v-flex xs12>
+          <h3 class="title-head text-md-center text-xs-center mb-4">
+            <v-icon class="mr-3" color="red" size="45">calendar_today</v-icon>予定表
+          </h3>
+          <v-flex class xs12>
+            <div class="gcal ml-5" v-html="calendarUrl"></div>
+          </v-flex>
+        </v-flex>
       </v-layout>
     </v-container>
   </div>
@@ -43,7 +51,9 @@ export default {
           text:
             "ホームページを移転しました。これからもよろしくお願いいたします。"
         }
-      ]
+      ],
+      calendarUrl:
+        '<iframe src="https://calendar.google.com/calendar/embed?src=i2g9m5u0sqojeuqocemfc4thi0%40group.calendar.google.com&ctz=Asia%2FTokyo" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>'
     };
   }
 };
@@ -96,5 +106,23 @@ export default {
     white 2px,
     white 4px
   );
+}
+
+.gcal {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 30px;
+  height: 0;
+  overflow: hidden;
+}
+
+.gcal iframe,
+.gcal object,
+.gcal embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80%;
 }
 </style>
