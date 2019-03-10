@@ -26,7 +26,7 @@
           </v-hover>
         </v-flex>
         <v-flex xs12>
-          <h3 class="t-title stripe ma-3">Ｔｏｏｍｙ</h3>
+          <h3 class="t-title stripe ma-3">Ｔｏｍｍｙ</h3>
           <p
             class="article ml-5 multiLine"
           >フジミュージックの卒業生で、現在は静岡を中心に音楽活動をしているTommyさんのサイトです。フジミュージックのイベントにも定期的に参加してくれています。</p>

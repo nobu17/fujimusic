@@ -3,7 +3,7 @@
     <v-toolbar dark color="pink darken-2" app>
       <v-toolbar-title class="headline">
         <span class="px-2" @click="changePage(menu[0].link)">fujimusic</span>
-        <span class="px-2">ギタースクール</span>
+        <span class="hidden-sm-and-down px-2">ギタースクール</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">

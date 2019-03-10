@@ -12,10 +12,21 @@
       <v-container>
         <v-flex class="pa-3" xs12>
           <v-card class="mb-5 elevation-0 transparent">
-            <v-card-title class="mb-3 justify-center">
+            <v-card-title class="mb-2 justify-center">
               <div>
-                <h3 class="title-head">
-                  <v-icon color="red" size="45">sentiment_satisfied_alt</v-icon>
+                <h3
+                  :class="{'title-head_xs': $vuetify.breakpoint.smAndDown, 'title-head': $vuetify.breakpoint.mdAndUp}"
+                >
+                  <v-icon
+                    color="red"
+                    size="45"
+                    class="hidden-sm-and-down mr-2"
+                  >sentiment_satisfied_alt</v-icon>
+                  <v-icon
+                    color="red"
+                    size="20"
+                    class="hidden-md-and-up mr-2"
+                  >sentiment_satisfied_alt</v-icon>
                   {{topTitle}}
                 </h3>
               </div>
@@ -24,7 +35,7 @@
               <v-layout wrap>
                 <v-flex xs12 md7>
                   <div
-                    :class="{'article_xs mb-3': $vuetify.breakpoint.smAndDown, 'article mr-3': $vuetify.breakpoint.mdAndUp}"
+                    :class="{'article_xs': $vuetify.breakpoint.smAndDown, 'article mr-3': $vuetify.breakpoint.mdAndUp}"
                     style="white-space:pre-wrap;"
                   >{{topMessage}}</div>
                 </v-flex>
@@ -37,10 +48,13 @@
         </v-flex>
         <v-flex class="pa-2" xs12>
           <v-card class="elevation-0 transparent mb-5">
-            <v-card-title class="mb-3 justify-center">
+            <v-card-title class="mb-2 justify-center">
               <div>
-                <h3 class="title-head">
-                  <v-icon color="red" size="45" class="mr-2">audiotrack</v-icon>当教室の特徴
+                <h3
+                  :class="{'title-head_xs': $vuetify.breakpoint.smAndDown, 'title-head': $vuetify.breakpoint.mdAndUp}"
+                >
+                  <v-icon color="red" size="45" class="hidden-sm-and-down mr-2">audiotrack</v-icon>
+                  <v-icon color="red" size="20" class="hidden-md-and-up mr-2">audiotrack</v-icon>当教室の特徴
                 </h3>
               </div>
             </v-card-title>
@@ -110,8 +124,11 @@
           <v-card class="elevation-0 transparent">
             <v-card-title class="mb-3 justify-center">
               <div>
-                <h3 class="title-head">
-                  <v-icon color="red" size="45" class="mr-2">account_circle</v-icon>講師紹介
+                <h3
+                  :class="{'title-head_xs mb-3': $vuetify.breakpoint.smAndDown, 'title-head': $vuetify.breakpoint.mdAndUp}"
+                >
+                  <v-icon color="red" size="45" class="hidden-sm-and-down mr-2">account_circle</v-icon>
+                  <v-icon color="red" size="20" class="hidden-md-and-up mr-2">account_circle</v-icon>講師紹介
                 </h3>
               </div>
             </v-card-title>
@@ -141,7 +158,7 @@ export default {
         "fujimusic(フジミュージック）ギター教室には、小学生から60代、70代、の幅広い年代の生徒がいます。\nアットホームで気軽に楽しめ、そして、音楽好きな仲間を見つけることができる、そんな教室を目指しています。\nやってみたいけど、踏み出せない、そんなひとはいませんか？\nぜひ一緒に音楽を楽しみましょう！\n\n静岡県東部(沼津市,三島市,長泉町,清水町,裾野市)と、静岡県中部(静岡市清水区,葵区,駿河区)で活動をしています。",
       topImages: [
         { src: require("../assets/top/slide0.png") },
-        { src: require("../assets/top/slide1.jpg") },
+        { src: require("../assets/top/slide1.jpg") }
       ],
       teacherImage: require("../assets/top/teacher.jpg"),
       teacherProfile:
@@ -172,7 +189,7 @@ export default {
 }
 .title-head_xs {
   letter-spacing: 2px;
-  font-size: 20px;
+  font-size: 22px;
   line-height: 25px;
   font-weight: 150;
 }
