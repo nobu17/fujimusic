@@ -15,9 +15,9 @@
       <v-menu class="hidden-md-and-up">
         <v-toolbar-side-icon slot="activator"></v-toolbar-side-icon>
         <v-list>
-          <v-list-tile v-for="item in menu" :key="item.title">
+          <v-list-tile v-for="item in menu" :key="item.title" @click="changePage(item.link)">
             <v-list-tile-content>
-              <v-list-tile-title @click="changePage(item.link)">
+              <v-list-tile-title>
                 <v-icon class="pr-1">{{ item.icon }}</v-icon>
                 {{ item.title }}
               </v-list-tile-title>
