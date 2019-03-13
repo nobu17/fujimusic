@@ -92,7 +92,7 @@ export default {
   },
   head: {
     title: {
-      inner: "fujimusic",
+      inner: "fujimusic ギタースクール",
       separator: "|",
       complement: "教室紹介"
     },

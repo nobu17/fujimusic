@@ -167,7 +167,7 @@ export default {
   },
   head: {
     title: {
-      inner: "fujimusic",
+      inner: "fujimusic ギタースクール",
       separator: "|",
       complement: "ギター教室"
     },
