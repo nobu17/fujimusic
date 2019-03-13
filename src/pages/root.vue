@@ -167,12 +167,15 @@ export default {
   },
   head: {
     title: {
-      inner: "fujimusic"
+      inner: "fujimusic",
+      separator: "|",
+      complement: "ギター教室"
     },
     meta: [
       {
         name: "description",
-        content: "静岡県で活動しているギター教室です。東部(沼津市,三島市,長泉町,清水町,裾野市)と、中部(静岡市清水区,葵区,駿河区)で活動をしていす。"
+        content:
+          "静岡県で活動しているギター教室です。東部(沼津市,三島市,長泉町,清水町,裾野市)と、中部(静岡市清水区,葵区,駿河区)で活動をしていす。"
       }
     ]
   }

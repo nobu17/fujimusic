@@ -16,7 +16,11 @@
             <v-flex v-for="card in cards" :key="card.title" xs12 md6>
               <v-hover>
                 <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 2}`">
-                  <v-img :src="card.src" aspect-ratio="2" @click="openImage(card.message, card.src)"></v-img>
+                  <v-img
+                    :src="card.src"
+                    aspect-ratio="2"
+                    @click="openImage(card.message, card.src)"
+                  ></v-img>
                   <v-card-actions>{{ card.message }}</v-card-actions>
                 </v-card>
               </v-hover>
@@ -62,6 +66,19 @@ export default {
     openImage(message, imageSrc) {
       this.$refs.imageDialog.open(message, imageSrc);
     }
+  },
+  head: {
+    title: {
+      inner: "fujimusic",
+      separator: "|",
+      complement: "イベント"
+    },
+    meta: [
+      {
+        name: "description",
+        content: "fujimusicのイベント写真を紹介します。"
+      }
+    ]
   }
 };
 </script>
