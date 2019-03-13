@@ -51,6 +51,14 @@ export default {
     openUrl(url) {
       window.open(url);
     }
+  },
+  head: {
+    title: {
+      inner: "fujimusic",
+      separator: "|",
+      complement: "生徒紹介"
+    },
+    meta: [{ name: "description", content: "fujimusicの生徒の紹介です。" }]
   }
 };
 </script>

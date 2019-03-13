@@ -57,6 +57,19 @@ export default {
       calendarUrl:
         '<iframe src="https://calendar.google.com/calendar/embed?src=i2g9m5u0sqojeuqocemfc4thi0%40group.calendar.google.com&ctz=Asia%2FTokyo&showPrint=0&showTabs=0" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>'
     };
+  },
+  head: {
+    title: {
+      inner: "fujimusic",
+      separator: "|",
+      complement: "お知らせ"
+    },
+    meta: [
+      {
+        name: "description",
+        content: "fujimusicからお知らせとスケジュールを記載します。"
+      }
+    ]
   }
 };
 </script>

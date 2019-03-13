@@ -24,11 +24,11 @@
           <v-flex xs12>
             <h3 class="t-title stripe ma-3 text-md-center text-xs-center xs12 md6">時間</h3>
             <div class="text-md-center text-xs-center mb-5">
-            <p
-              class="time-list text-md-center text-xs-center"
-              v-for="(time,i) in room.lessonTimes"
-              :key="i"
-            >{{time.weekOfDay + " " + time.start + "～" + time.end }}</p>
+              <p
+                class="time-list text-md-center text-xs-center"
+                v-for="(time,i) in room.lessonTimes"
+                :key="i"
+              >{{time.weekOfDay + " " + time.start + "～" + time.end }}</p>
             </div>
           </v-flex>
           <v-flex xs12>
@@ -62,7 +62,7 @@ export default {
           ],
           images: [
             { src: require("../assets/classroom/mishima1.jpg") },
-            { src: require("../assets/classroom/mishima2.jpg") },
+            { src: require("../assets/classroom/mishima2.jpg") }
           ],
           locationInfo: {
             address: "静岡県駿東郡長泉町竹原211-30 南部地区センター2F",
@@ -78,7 +78,7 @@ export default {
           lessonTimes: [{ weekOfDay: "日曜日", start: "15:00", end: "20:00" }],
           images: [
             { src: require("../assets/classroom/shimizu1.jpg") },
-            { src: require("../assets/classroom/shimizu2.jpg") },
+            { src: require("../assets/classroom/shimizu2.jpg") }
           ],
           locationInfo: {
             address: "静岡県静岡市清水区八坂2110-2　北部交流センター１F",
@@ -89,6 +89,14 @@ export default {
         }
       ]
     };
+  },
+  head: {
+    title: {
+      inner: "fujimusic",
+      separator: "|",
+      complement: "教室紹介"
+    },
+    meta: [{ name: "description", content: "fujimusicの三島教室と清水教室の紹介です。" }]
   }
 };
 </script>

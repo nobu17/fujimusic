@@ -3,6 +3,7 @@ import "./plugins/vuetify";
 import App from "./App.vue";
 import router from "./router";
 import VueAnalytics from "vue-analytics";
+import VueHead from "vue-head";
 
 Vue.config.productionTip = false;
 
@@ -15,3 +16,5 @@ Vue.use(VueAnalytics, {
   id: "UA-135911364-1",
   router
 });
+
+Vue.use(VueHead);

@@ -82,6 +82,14 @@ export default {
       priceDescription:
         "入会金　　　５０００円\n１ヵ月に３回のレッスンになります\n1回のレッスンは1時間です\n月会費3回分\n中学生以下　３０００円\n高校生　　　４０００円\n一般　　　　５０００円\n個人レッスン1回50分　３０００円　予約制"
     };
+  },
+  head: {
+    title: {
+      inner: "fujimusic",
+      separator: "|",
+      complement: "料金案内"
+    },
+    meta: [{ name: "description", content: "fujimusicの料金案内です。" }]
   }
 };
 </script>
