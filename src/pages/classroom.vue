@@ -1,10 +1,10 @@
 <template>
   <div>
-    <v-container>
+    <v-container :class="{'ma-0 pa-0': $vuetify.breakpoint.smAndDown}">
       <v-layout wrap>
         <v-flex v-for="(room,i) in classRooms" :key="i" xs12>
           <v-flex xs12>
-            <h3 class="title-head text-md-center text-xs-center mb-4">
+            <h3 class="title-head text-md-center text-xs-center mt-3 mb-4">
               <v-icon class="mr-3" color="red" size="45">queue_music</v-icon>
               {{room.name}}
             </h3>

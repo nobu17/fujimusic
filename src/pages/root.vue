@@ -9,7 +9,7 @@
           <v-carousel-item v-for="(item,i) in topImages" :key="i" :src="item.src"></v-carousel-item>
         </v-carousel>
       </v-flex>
-      <v-container>
+      <v-container :class="{'ma-0 pa-0': $vuetify.breakpoint.smAndDown}">
         <v-flex class="pa-3" xs12>
           <v-card class="mb-5 elevation-0 transparent">
             <v-card-title class="mb-2 justify-center">
@@ -135,7 +135,10 @@
             <v-card-text>
               <v-layout wrap>
                 <v-flex xs12 md7>
-                  <div class="article" style="white-space:pre-wrap;">{{teacherProfile}}</div>
+                  <div
+                    :class="{'article_xs': $vuetify.breakpoint.smAndDown, 'article mr-3': $vuetify.breakpoint.mdAndUp}"
+                    style="white-space:pre-wrap;"
+                  >{{teacherProfile}}</div>
                 </v-flex>
                 <v-flex xs12 md5>
                   <v-img :src="teacherImage" class="ml-2" aspect-ratio="1.4"></v-img>
@@ -162,7 +165,7 @@ export default {
       ],
       teacherImage: require("../assets/top/teacher.jpg"),
       teacherProfile:
-        "名前：丸山 幸男(まるやま ゆきお)\nご挨拶:フジミュージック代表の丸山です。三島、清水教室のどちらの生徒も楽しみながらレッスンをしています。定期的な発表の場もあるので、飽きずにレッスンを続けることができます。フジミュージックに参加して一緒に楽しみましょう。"
+        "名前：丸山 幸男(まるやま ゆきお)\nフジミュージック代表の丸山です。三島、清水教室のどちらの生徒も楽しみながらレッスンをしています。定期的な発表の場もあるので、飽きずにレッスンを続けることができます。フジミュージックに参加して一緒に楽しみましょう。"
     };
   },
   head: {

@@ -1,14 +1,14 @@
 <template>
   <div>
-    <v-container>
+    <v-container :class="{'ma-0 pa-0': $vuetify.breakpoint.smAndDown}">
       <v-layout wrap>
         <v-flex xs12>
-          <h3 class="title-head text-md-center text-xs-center mb-4">
+          <h3 class="title-head text-md-center text-xs-center mt-3 mb-4">
             <v-icon class="mr-3" color="red" size="45">tag_faces</v-icon>生徒紹介
           </h3>
         </v-flex>
         <v-flex xs12>
-          <p class="article ml-5 multiLine">フジーミュージックの生徒(卒業生)の紹介です。</p>
+          <p class="article ml-5 multiLine">フジミュージックの生徒(卒業生)の紹介です。</p>
         </v-flex>
         <v-flex xs12>
           <h3 class="t-title stripe ma-3">音羽歯科</h3>
