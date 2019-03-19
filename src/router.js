@@ -11,6 +11,7 @@ import Students from "./pages/students";
 Vue.use(VueRouter);
 // VueRouterインスタンスを生成する
 const router = new VueRouter({
+  mode: 'history', // SEO対策でURLから#を外す
   // URLのパスと紐づくコンポーネントをマッピング
   routes: [
     {

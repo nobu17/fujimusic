@@ -11,12 +11,12 @@
           <p class="article ml-5 multiLine">フジミュージックの生徒(卒業生)の紹介です。</p>
         </v-flex>
         <v-flex xs12>
-          <h3 class="t-title stripe ma-3">音羽歯科</h3>
+          <h3 class="t-title stripe ma-3 text-md-center text-xs-center">音羽歯科</h3>
           <p
-            class="article ml-5 multiLine"
+            :class="{'article_xs ml-3 multiLine': $vuetify.breakpoint.smAndDown, 'article ml-5 multiLine': $vuetify.breakpoint.mdAndUp}"
           >清水教室の生徒の山田さんの経営する歯科医院です。フジミュージックで毎年開催するＢＢＱの写真も載っていますので見てみてください。</p>
           <v-hover>
-            <div slot-scope="{ hover }" :class="`ml-5 mb-3 elevation-${hover ? 12 : 2}`">
+            <div slot-scope="{ hover }" :class="`ml-3 mr-3 mb-3 elevation-${hover ? 12 : 2}`">
               <v-img
                 class="otologo"
                 :src="require('../assets/students/otowa.png')"
@@ -26,12 +26,12 @@
           </v-hover>
         </v-flex>
         <v-flex xs12>
-          <h3 class="t-title stripe ma-3">Ｔｏｍｍｙ</h3>
+          <h3 class="t-title stripe ma-3 text-md-center text-xs-center">Ｔｏｍｍｙ</h3>
           <p
-            class="article ml-5 multiLine"
+            :class="{'article_xs ml-3 multiLine': $vuetify.breakpoint.smAndDown, 'article ml-5 multiLine': $vuetify.breakpoint.mdAndUp}"
           >フジミュージックの卒業生で、現在は静岡を中心に音楽活動をしているTommyさんのサイトです。フジミュージックのイベントにも定期的に参加してくれています。</p>
           <v-hover>
-            <div slot-scope="{ hover }" :class="`ml-5 mb-3 elevation-${hover ? 12 : 2}`">
+            <div slot-scope="{ hover }" :class="`ml-3 mr-3 mb-3 elevation-${hover ? 12 : 2}`">
               <v-img
                 class="otologo"
                 :src="require('../assets/students/tommy.jpg')"
