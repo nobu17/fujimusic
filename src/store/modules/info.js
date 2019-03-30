@@ -11,7 +11,7 @@ export const Info = {
     dateList: []
   },
   getters: {
-    currentMonthInfoList: state => state.currentMonthInfoList,
+    currentMonthInfoList: state => state.currentMonthInfoList,   
     dateList: state => state.dateList
   },
   mutations: {
