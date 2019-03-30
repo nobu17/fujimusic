@@ -35,8 +35,12 @@
           </v-flex>
           <v-flex xs12>
             <h3 class="t-title stripe ma-3 text-md-center text-xs-center xs12">練習場所</h3>
-            <p :class="{'article_xs ml-3': $vuetify.breakpoint.smAndDown, 'article ml-5': $vuetify.breakpoint.mdAndUp}">{{room.locationInfo.address}}</p>
-            <p :class="{'article_xs ml-3': $vuetify.breakpoint.smAndDown, 'article ml-5': $vuetify.breakpoint.mdAndUp}">{{room.locationInfo.etc}}</p>
+            <p
+              :class="{'article_xs ml-3': $vuetify.breakpoint.smAndDown, 'article ml-5': $vuetify.breakpoint.mdAndUp}"
+            >{{room.locationInfo.address}}</p>
+            <p
+              :class="{'article_xs ml-3': $vuetify.breakpoint.smAndDown, 'article ml-5': $vuetify.breakpoint.mdAndUp}"
+            >{{room.locationInfo.etc}}</p>
             <v-flex class xs12>
               <div class="ggmap ml-5" v-html="room.locationInfo.map"></div>
             </v-flex>

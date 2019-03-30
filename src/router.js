@@ -15,6 +15,10 @@ Vue.use(VueRouter);
 // VueRouterインスタンスを生成する
 const router = new VueRouter({
   mode: "history", // SEO対策でURLから#を外す
+  // ページ移動時にトップスクロール
+  scrollBehavior() {
+    return { x: 0, y: 0 };
+  },
   // URLのパスと紐づくコンポーネントをマッピング
   routes: [
     {

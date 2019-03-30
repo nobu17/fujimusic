@@ -110,7 +110,6 @@ export default {
           },
           error: err => {
             this.isLoading = false;
-            console.error(err);
             this.errorMessage =
               "ロードに失敗しました。画面をリロードしてください。" +
               err.message;

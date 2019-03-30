@@ -30,7 +30,7 @@
               </v-list-tile-content>
 
               <v-list-tile-action>
-                <v-btn icon ripple @click="deleteItem(item, index)">
+                <v-btn icon ripple @click="deleteItem(item)">
                   <v-icon color="grey lighten-1">delete_forever</v-icon>
                 </v-btn>
               </v-list-tile-action>
@@ -46,6 +46,7 @@
 </template>
 
 <script>
+/* eslint-disable no-console */
 import InfoEditDialog from "../../components/infoedit/infoeditDialog";
 import LoadingScreen from "../../components/common/loadingScreen";
 import MessageDialog from "../../components/common/messageDialog";
@@ -69,8 +70,10 @@ export default {
           this.selectionChange();
         }
       },
-      error: result => {
+      error: err => {
         this.isLoading = false;
+        console.error(err);
+        this.$refs.messageDialog.open("エラー", err.message, "ok");
       }
     };
     this.$store.dispatch("info/readDateList", req);
@@ -125,7 +128,7 @@ export default {
       }
       this.iconPushed = false;
     },
-    async deleteItem(item, index) {
+    async deleteItem(item) {
       this.iconPushed = true;
       if (confirm("削除を行いますか？")) {
         this.isLoading = true;
