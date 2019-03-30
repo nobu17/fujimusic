@@ -13,6 +13,7 @@
         </v-flex>
         <v-flex xs12>
           <v-select
+            class="ml-3"
             lebel="日時"
             v-model="selectedDate"
             item-text="date"

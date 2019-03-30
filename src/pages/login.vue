@@ -8,7 +8,7 @@
           </h3>
         </v-flex>
         <v-flex xs12>
-          <v-form ref="form" v-model="valid" lazy-validation @submit="submit">
+          <v-form class="ml-4 mr-4" ref="form" v-model="valid" lazy-validation @submit="submit">
             <v-text-field
               ref="idTextbox"
               v-model="userModel.id"
