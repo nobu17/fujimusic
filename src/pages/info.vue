@@ -3,7 +3,7 @@
     <v-container :class="{'ma-0 pa-0': $vuetify.breakpoint.smAndDown}">
       <v-layout wrap>
         <v-flex xs12>
-          <h3 class="title-head text-md-center text-xs-center mt-1 mb-4">
+          <h3 class="title-head text-md-center text-xs-center mt-2 mb-1">
             <v-icon class="mr-3" color="pink" size="45">info</v-icon>お知らせ
           </h3>
         </v-flex>

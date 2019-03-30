@@ -206,7 +206,7 @@ export default {
 }
 .title-head_xs {
   letter-spacing: 2px;
-  font-size: 22px;
+  font-size: 24px;
   line-height: 25px;
   font-weight: 150;
 }
