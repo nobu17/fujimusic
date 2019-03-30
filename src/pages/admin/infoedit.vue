@@ -1,9 +1,10 @@
 <template>
   <div>
-    <v-container :class="{'ma-0 pa-0': $vuetify.breakpoint.smAndDown}">
+    <AdminNavigate class="mt-0 mb-0"/>
+    <v-container class="mt-0 mb-0">
       <v-layout wrap>
         <v-flex xs12>
-          <h3 class="title-head text-md-center text-xs-center mt-3 mb-4">
+          <h3 class="title-head text-md-center text-xs-center mt-0 mb-1">
             <v-icon class="mr-3" color="red" size="45">attach_money</v-icon>お知らせ管理
           </h3>
         </v-flex>
@@ -47,11 +48,13 @@
 import InfoEditDialog from "../../components/infoedit/infoeditDialog";
 import LoadingScreen from "../../components/common/loadingScreen";
 import MessageDialog from "../../components/common/messageDialog";
+import AdminNavigate from "../../components/admin/adminNavigate";
 export default {
   components: {
     InfoEditDialog,
     LoadingScreen,
-    MessageDialog
+    MessageDialog,
+    AdminNavigate
   },
   created() {
     // init api call for reading datelist
