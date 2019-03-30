@@ -203,7 +203,9 @@ export default {
   height: 4px;
   color: #ffffff;
 }
+</style>
 
+<style>
 .gc-wrap {
   max-width: 800px;
   margin: 3% auto;
