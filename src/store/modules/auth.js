@@ -2,6 +2,7 @@
 import { APIBase } from "./common/apibase";
 import { AppEnv } from "./common/appenv";
 
+// 認証ストア
 export const Auth = {
   namespaced: true,
   state: {
@@ -35,7 +36,7 @@ export const Auth = {
           });
           success();
         } else {
-          error();
+          error("exceptional error");
         }
       } catch (err) {
         console.log("api error", err);

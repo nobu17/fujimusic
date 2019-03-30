@@ -29,3 +29,17 @@ export class APIBase {
     }
   }
 }
+
+export class ApiError extends Error {
+  constructor(message, stusCode) {
+    super(message);
+    this.stusCode = stusCode;
+    this.isAuthError = false;
+    this.isServerError = false;
+    if (stusCode >= 400 && stusCode < 500) {
+      this.isAuthError = true;
+    } else if (stusCode >= 500 && stusCode < 600) {
+      this.isServerError = true;
+    }
+  }
+}

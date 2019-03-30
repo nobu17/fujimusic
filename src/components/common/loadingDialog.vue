@@ -4,8 +4,7 @@
       <v-container fill-height>
         <v-layout column justify-center align-center>
           <v-progress-circular indeterminate :size="70" :width="7" :color="progressColor"></v-progress-circular>
-          <h1>{{ message }}</h1>
-          
+          <h1>{{ message }}</h1>         
         </v-layout>
       </v-container>
     </v-dialog>
