@@ -9,7 +9,7 @@
         </v-flex>
         <v-flex xs12>
           <v-select
-            :class="{'title-head_xs mb-3': $vuetify.breakpoint.smAndDown, 'title-head mb-4': $vuetify.breakpoint.mdAndUp}"
+            :class="{'title-head_xs mb-3 ml-3': $vuetify.breakpoint.smAndDown, 'title-head mb-4': $vuetify.breakpoint.mdAndUp}"
             :disabled="isLoading"
             lebel="日時"
             v-model="selectedDate"
@@ -26,8 +26,8 @@
         </v-flex>
         <v-flex xs12>
           <div v-show="!isLoading">
-            <v-flex class="cardroot mb-2 xs12 md12" v-for="(info,i) in items" :key="i">
-              <v-card class="cardroot" color="elevation-0 transparent">
+            <v-flex class="cardroot ml-3 mb-2 xs12 md12" v-for="(info,i) in items" :key="i">
+              <v-card color="elevation-0 transparent">
                 <v-card-title>
                   <div>
                     <h3
@@ -36,7 +36,14 @@
                       <div>
                         <v-icon class="hidden-sm-and-down" color="red" size="40">calendar_today</v-icon>
                         <v-icon class="hidden-md-and-up" color="red" size="25">calendar_today</v-icon>
-                        {{info.postDate}}&nbsp;&nbsp;{{info.title}}
+                        {{info.postDate}}
+                      </div>
+                    </h3>
+                    <h3
+                      :class="{'title-head_xs mb-3': $vuetify.breakpoint.smAndDown, 'title-head mb-4': $vuetify.breakpoint.mdAndUp}"
+                    >
+                      <div>
+                        {{info.title}}
                       </div>
                     </h3>
                     <div
