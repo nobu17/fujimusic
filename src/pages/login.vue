@@ -36,19 +36,54 @@
     </v-container>
     <LoadingDialog ref="loadingDialog"/>
     <MessageDialog ref="messageDialog"/>
+    <LoadingScreen :isLoading="isLoading"/>
   </div>
 </template>
 
 <script>
+import LoadingScreen from "../components/common/loadingScreen";
 import LoadingDialog from "../components/common/loadingDialog";
 import MessageDialog from "../components/common/messageDialog";
 export default {
   components: {
     LoadingDialog,
-    MessageDialog
+    MessageDialog,
+    LoadingScreen
+  },
+  created() {
+    //トークンがあれば
+    if (this.token) {
+      this.isLoading = true;
+      const req = {
+        success: () => {
+          this.isLoading = false;
+          //画面遷移
+          let url = this.$route.query.redirect;
+          if (!url || url === "") {
+            //なければトップページ
+            url = "/root";
+          }
+          this.$router.push(url);
+        },
+        error: err => {
+          this.isLoading = false;
+          //期限切れの場合は何も表示しない
+          if (!err.isExpired) {
+            this.$refs.messageDialog.open("エラー", err.message, "ok");
+          }
+        }
+      };
+      this.$store.dispatch("auth/loginWithToken", req);
+    }
   },
   mounted() {
     this.$refs.idTextbox.focus();
+  },
+  computed: {
+    // トークン
+    token() {
+      return this.$store.getters["auth/token"];
+    }
   },
   methods: {
     submit() {
@@ -86,6 +121,7 @@ export default {
   },
   data() {
     return {
+      isLoading: false,
       idRules: [
         v => {
           if (!v || v.trim() == "") {

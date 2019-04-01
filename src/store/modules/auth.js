@@ -2,6 +2,7 @@
 import { APIBase } from "./common/apibase";
 import { AppEnv } from "./common/appenv";
 
+const tokenKey = "userToken";
 // 認証ストア
 export const Auth = {
   namespaced: true,
@@ -13,7 +14,16 @@ export const Auth = {
   getters: {
     isLoggedIn: state => state.isLoggedIn,
     user: state => state.user,
-    token: state => state.token,
+    token: state => {
+      if (state.token) {
+        return state.token;
+      }
+      // ストレージにトークンがあれば
+      if (localStorage[tokenKey]) {
+        return localStorage[tokenKey];
+      }
+      return null;
+    },
     isAdmin: state => {
       if (state.user && state.user.role && state.user.role === "admin") {
         return true;
@@ -29,6 +39,41 @@ export const Auth = {
     }
   },
   actions: {
+    async loginWithToken(context, { success, error }) {
+      const token = localStorage[tokenKey];
+      const authInfo = { token: token, method: "authByToken" };
+      try {
+        const authResult = await api.post(authInfo);
+        if (authResult.data) {
+          context.commit("changeLoginState", {
+            isLoggedIn: true,
+            token: authResult.data.token,
+            user: { userId: authResult.data.userId, role: authResult.data.role }
+          });
+          success();
+        }
+      } catch (err) {
+        console.log("api error", err);
+        let authErrorResult = {
+          isAuthError: false,
+          isServerError: false,
+          isExpired: false
+        };
+        // HTTPの結果コードに応じて値をセット
+        if (err.response) {
+          const status = err.response.status;
+          if (status === 401) {
+            //期限切れ
+            authErrorResult.isExpired = true;
+          } else if (status >= 400 && status < 500) {
+            authErrorResult.isAuthError = true;
+          } else if (status >= 500 && status < 600) {
+            authErrorResult.isServerError = true;
+          }
+        }
+        error(authErrorResult);
+      }
+    },
     // ログイン処理(authInfo:{ userId, password })
     async login(context, { authInfo, success, error }) {
       try {
@@ -40,6 +85,8 @@ export const Auth = {
             token: authResult.data.token,
             user: { userId: authResult.data.userId, role: authResult.data.role }
           });
+          // トークンを保存
+          localStorage[tokenKey] = authResult.data.token;
           success();
         } else {
           error("exceptional error");
@@ -65,6 +112,10 @@ export const Auth = {
         token: "",
         user: null
       });
+      // トークン削除
+      if (localStorage[tokenKey]) {
+        localStorage.removeItem(tokenKey);
+      }
     }
   }
 };
