@@ -74,6 +74,16 @@ router.beforeEach((to, from, next) => {
   // 認証状態を取得
   let isLoggedIn = store.state.auth.isLoggedIn;
 
+  // ログイン状態でログアウト
+  if (isLoggedIn && to.path === "/logout") {
+    store.dispatch("auth/logout");
+    // トップページへ
+    next({
+      path: "/"
+    });
+    return;
+  }
+
   if (to.matched.some(record => record.meta.requiresAuth) && !isLoggedIn) {
     let path = to.fullPath;
     next({

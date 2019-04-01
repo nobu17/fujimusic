@@ -13,13 +13,19 @@ export const Auth = {
   getters: {
     isLoggedIn: state => state.isLoggedIn,
     user: state => state.user,
-    token: state => state.token
+    token: state => state.token,
+    isAdmin: state => {
+      if (state.user && state.user.role && state.user.role === "admin") {
+        return true;
+      }
+      return false;
+    }
   },
   mutations: {
-    changeLoginState(state, { isLoggedIn, token, userId }) {
+    changeLoginState(state, { isLoggedIn, token, user }) {
       state.isLoggedIn = isLoggedIn;
       state.token = token;
-      state.userId = userId;
+      state.user = user;
     }
   },
   actions: {
@@ -28,11 +34,11 @@ export const Auth = {
       try {
         authInfo.method = "auth";
         const authResult = await api.post(authInfo);
-        if (authResult) {
+        if (authResult.data) {
           context.commit("changeLoginState", {
             isLoggedIn: true,
-            token: authResult.token,
-            user: { userId: authResult.userId, role: authResult.role }
+            token: authResult.data.token,
+            user: { userId: authResult.data.userId, role: authResult.data.role }
           });
           success();
         } else {
@@ -52,6 +58,13 @@ export const Auth = {
         }
         error(authErrorResult);
       }
+    },
+    logout(context) {
+      context.commit("changeLoginState", {
+        isLoggedIn: false,
+        token: "",
+        user: null
+      });
     }
   }
 };

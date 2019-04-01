@@ -7,7 +7,7 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn v-for="item in menu" :key="item.title" @click="changePage(item.link)" flat>
+        <v-btn v-for="item in filteredMenu" :key="item.title" @click="changePage(item.link)" flat>
           <v-icon class="pr-1">{{ item.icon }}</v-icon>
           {{ item.title }}
         </v-btn>
@@ -15,7 +15,7 @@
       <v-menu class="hidden-md-and-up">
         <v-toolbar-side-icon slot="activator"></v-toolbar-side-icon>
         <v-list>
-          <v-list-tile v-for="item in menu" :key="item.title" @click="changePage(item.link)">
+          <v-list-tile v-for="item in filteredMenu" :key="item.title" @click="changePage(item.link)">
             <v-list-tile-content>
               <v-list-tile-title>
                 <v-icon class="pr-1">{{ item.icon }}</v-icon>
@@ -37,13 +37,43 @@
 export default {
   name: "App",
   components: {},
+  computed: {
+    // ユーザのログイン状態に応じてフィルタしたメニュー
+    filteredMenu() {
+      return this.menu.filter(item => {
+        // 認証設定が無ければ無条件ok
+        if (!item.isNeedAdmin && !item.isNeedLogin) {
+          return true;
+        }
+        if (item.isNeedLogin) {
+          if (this.isLoggedIn) {
+            return true;
+          }
+        }
+        if (item.isNeedAdmin) {
+          if (this.isAdmin) {
+            return true;
+          }
+        }
+        return false;
+      });
+    },
+    // ログイン状態
+    isLoggedIn() {
+      return this.$store.getters["auth/isLoggedIn"];
+    },
+    // ログイン中ユーザは管理者かどうか
+    isAdmin() {
+      return this.$store.getters["auth/isAdmin"];
+    }
+  },
   methods: {
     changePage(url) {
       if (!url || url === "") {
         //なければトップページ
         url = "/root";
       }
-      // httpから始まる場合
+      // httpから始まる場合は別タブ(twitter)
       if (url.startsWith("http")) {
         window.open(url);
       } else {
@@ -65,6 +95,18 @@ export default {
           title: "Twitter",
           icon: "share",
           link: "https://twitter.com/fujimusic2011"
+        },
+        {
+          title: "管理ページ",
+          icon: "https",
+          link: "/admin",
+          isNeedAdmin: true
+        },
+        {
+          title: "ログアウト",
+          icon: "cancel_presentation",
+          link: "/logout",
+          isNeedLogin: true
         }
       ]
     };
