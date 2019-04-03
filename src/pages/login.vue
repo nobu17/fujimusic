@@ -70,6 +70,8 @@ export default {
           //期限切れの場合は何も表示しない
           if (!err.isExpired) {
             this.$refs.messageDialog.open("エラー", err.message, "ok");
+          } else {
+            this.$refs.idTextbox.focus();
           }
         }
       };

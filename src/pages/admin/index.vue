@@ -45,7 +45,9 @@ export default {
   data() {
     return {
       menuList: [
-        { text: "お知らせ管理", icon: "info", link: "/admin/infoedit" }
+        { text: "お知らせ管理", icon: "info", link: "/admin/infoedit" },
+        { text: "三島教室の設定", icon: "info", link: "/admin/classedit/mishima" },
+        { text: "清水教室の設定", icon: "info", link: "/admin/classedit/shimizu" }
       ]
     };
   }

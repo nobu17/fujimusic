@@ -21,11 +21,28 @@ export class APIBase {
     });
   }
 
+  async postWithMultiPartData(param) {
+    return await axios.post(this.apiUrl, param, {
+      headers: this.getApiKeyMultiPartHeader()
+    });
+  }
+
   getApiKeyHeader() {
     if (this.apiKey) {
       return { "Content-type": "application/json", Authorization: this.apiKey };
     } else {
       return { "Content-type": "application/json" };
+    }
+  }
+
+  getApiKeyMultiPartHeader() {
+    if (this.apiKey) {
+      return {
+        "Content-type": "multipart/form-data",
+        Authorization: this.apiKey
+      };
+    } else {
+      return { "Content-type": "multipart/form-data" };
     }
   }
 }
