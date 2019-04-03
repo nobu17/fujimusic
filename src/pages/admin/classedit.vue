@@ -134,10 +134,10 @@ export default {
   methods: {
     //画像を加工中の場合に確定を押下できなくするために保持
     disabledChanged(disabled) {
-      isModifingImage = disabled;
+      this.isModifingImage = disabled;
     },
     submit() {
-      if (this.$refs.form.validate() && !isModifingImage) {
+      if (this.$refs.form.validate() && !this.isModifingImage) {
         this.isLoading = true;
         const req = {
           classInfo: {
@@ -167,7 +167,7 @@ export default {
       const req = {
         classId: this.classId,
         imagesFiles: this.classInfo.imageList,
-        success: reuslt => {
+        success: result => {
           this.isLoading = false;
           if (result.failFileList && result.failFileList.length > 0) {
             this.$refs.messageDialog.open(
@@ -176,6 +176,8 @@ export default {
                 result.failFileList.join(""),
               "ok"
             );
+          } else {
+              this.$refs.messageDialog.open("情報", "処理が完了しました。", "ok");
           }
         },
         error: err => {
