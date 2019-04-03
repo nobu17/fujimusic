@@ -98,6 +98,7 @@ export const ClassRoom = {
         const result = await api.postClassImages(form);
         if (result) {
           success(result);
+          return;
         }
         error(new Error("un expected error"));
       } catch (err) {
