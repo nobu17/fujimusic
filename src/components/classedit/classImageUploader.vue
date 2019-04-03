@@ -5,7 +5,12 @@
         <v-img :src="base64" height="300" :contain="true"/>
       </v-flex>
       <v-flex xs12>
-        <ResizableImageInput :draw-image-args="drawImageArgs" v-model="fileName" @resized="resizeFinish"/>
+        <ResizableImageInput
+          :draw-image-args="drawImageArgs"
+          :imageName="fileName"
+          @resized="resizeFinish"
+          @disabledChanged="disabledChanged"
+        />
       </v-flex>
     </v-layout>
   </v-container>
@@ -35,16 +40,16 @@ export default {
   },
 
   methods: {
+    //ボタンの有効状態の切り替わり
+    disabledChanged(disabled) {
+      this.$emit("disabledChanged", disabled);
+    },
     resizeFinish({ base64, imageName }) {
       // 親にイベント発行
       //console.log(base64);
       this.base64 = base64;
       this.fileName = imageName;
       this.$emit("input", { fileUrl: this.base64, fileName: this.fileName });
-      //this.blob = blob;
-      //await uploadFunction(formData);
-
-      //this.sendingForm = false;
     },
 
     drawImageArgs(image) {

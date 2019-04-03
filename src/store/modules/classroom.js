@@ -26,7 +26,7 @@ export const ClassRoom = {
     async readClass(context, { classId, success, error }) {
       try {
         const result = await api.readClassInfo(classId);
-        console.log("result", result);
+        //console.log("result", result);
         if (result) {
           //画像は3個まで指定
           if (result.imageList.length > 3) {
@@ -74,7 +74,7 @@ export const ClassRoom = {
       // フィールド名はクラスIDから付与
       for (const imageFile of imagesFiles) {
         //既にアップロード済みのものは除外
-        if (imageFile.startsWith("data")) {
+        if (imageFile.fileUrl && imageFile.fileUrl.startsWith("data")) {
           const fName = classId + "_" + (counter + 1);
           let extension = imageFile.fileName.split(".").pop().toLowerCase();
           if(extension === "jpeg") {
@@ -91,7 +91,7 @@ export const ClassRoom = {
       // 新規アップロードが無ければ除外
       if (addCount === 0) {
         console.log("there are no file to upload");
-        success();
+        success({successFileList :[], failFileList:[]});
       }
 
       try {

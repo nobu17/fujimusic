@@ -43,7 +43,10 @@
           </v-flex>
           <div v-for="(img, index) in classInfo.imageList" :key="index">
             <v-flex xs12>
-              <ClassImageUploader :index="index" v-model="classInfo.imageList[index]"/>
+              <ClassImageUploader
+                @disabledChanged="disabledChanged"
+                v-model="classInfo.imageList[index]"
+              />
             </v-flex>
           </div>
           <v-flex xs12>
@@ -122,14 +125,19 @@ export default {
           return true;
         }
       ],
+      isModifingImage: false,
       valid: false,
       isLoading: false,
       classId: ""
     };
   },
   methods: {
+    //画像を加工中の場合に確定を押下できなくするために保持
+    disabledChanged(disabled) {
+      isModifingImage = disabled;
+    },
     submit() {
-      if (this.$refs.form.validate()) {
+      if (this.$refs.form.validate() && !isModifingImage) {
         this.isLoading = true;
         const req = {
           classInfo: {
@@ -159,8 +167,16 @@ export default {
       const req = {
         classId: this.classId,
         imagesFiles: this.classInfo.imageList,
-        success: () => {
+        success: reuslt => {
           this.isLoading = false;
+          if (result.failFileList && result.failFileList.length > 0) {
+            this.$refs.messageDialog.open(
+              "エラー",
+              "以下のファイルのアップロードに失敗しました。。" +
+                result.failFileList.join(""),
+              "ok"
+            );
+          }
         },
         error: err => {
           this.isLoading = false;

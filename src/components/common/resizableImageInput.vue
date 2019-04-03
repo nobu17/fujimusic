@@ -29,18 +29,15 @@ export default {
       type: Function,
       required: true
     },
-    value: {
+    imageName: {
       type: String,
       required: true
     }
   },
-  mounted() {
-    this.imageName = this.value;
-  },
+  mounted() {},
   data() {
     return {
-      disabled: false,
-      imageName: ""
+      disabled: false
     };
   },
 
@@ -50,14 +47,14 @@ export default {
     },
     resize() {
       this.disabled = true;
+      this.$emit("disabledChanged", this.disabled);
       const file = this.$refs.input.files[0];
 
       if (!file) {
         return;
       }
 
-      this.imageName = file.name;
-      this.$emit("input", this.imageName);
+      //this.imageName = file.name;
       const reader = new FileReader();
 
       reader.onload = event => {
@@ -77,12 +74,13 @@ export default {
           ctx.drawImage(...drawImageArgs);
 
           const base64 = canvas.toDataURL();
-          const imageName = this.imageName;
+          const imageName = file.name;
           this.$emit("resized", {
             base64,
             imageName
           });
           this.disabled = false;
+          this.$emit("disabledChanged", this.disabled);
         };
 
         image.src = event.target.result;
