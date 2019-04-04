@@ -168,7 +168,7 @@ export default {
       const req = {
         classId: this.classId,
         imagesFiles: this.classInfo.imageList,
-        success: async (result) => {
+        success: async result => {
           this.isLoading = false;
           if (result.failFileList && result.failFileList.length > 0) {
             this.$refs.messageDialog.open(
@@ -178,8 +178,13 @@ export default {
               "ok"
             );
           } else {
-              await this.$refs.messageDialog.open("情報", "処理が完了しました。", "ok");
-              this.$router.push("/admin");
+            await this.$refs.messageDialog.open(
+              "情報",
+              "処理が完了しました。",
+              "ok"
+            );
+            this.$store.commit("classroom/clearCurrentClassInfo");
+            this.$router.push("/admin");
           }
         },
         error: err => {
@@ -197,6 +202,7 @@ export default {
     cancel() {
       //管理トップへ
       if (confirm("変更をキャンセルして管理画面へ戻りますか？")) {
+        this.$store.commit("classroom/clearCurrentClassInfo");
         this.$router.push("/admin");
       }
     }

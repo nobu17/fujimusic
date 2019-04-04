@@ -22,6 +22,9 @@ export const ClassRoom = {
       //現在のクラスを設定
       state.currentClassInfo = classInfo;
     },
+    clearCurrentClassInfo(state) {
+      state.currentClassInfo = {};
+    },
     changeClassInfoList(state, { classInfoList }) {
       state.classInfoList = classInfoList;
     }
@@ -48,7 +51,7 @@ export const ClassRoom = {
               classId: classroom.classId,
               classInfo: classroom
             });
-          }          
+          }
           success();
           return;
         }
