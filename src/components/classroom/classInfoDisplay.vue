@@ -44,11 +44,8 @@
 </template>    
 
 <script>
-import LoadingPartialScreen from "../common/loadingPartialScreen";
 export default {
-  components: {
-    LoadingPartialScreen
-  },
+  components: {},
   props: {
     classInfo: {
       type: Object,

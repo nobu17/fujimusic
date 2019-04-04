@@ -83,7 +83,7 @@ export default {
         },
         error: async err => {
           this.isLoading = false;
-          console.error(err);
+          //console.error(err);
           await this.$refs.messageDialog.open("エラー", err.message, "ok");
           this.$router.push("/admin");
         }
@@ -153,7 +153,7 @@ export default {
           },
           error: err => {
             this.isLoading = false;
-            console.error(err);
+            //console.error(err);
             this.$refs.messageDialog.open(
               "エラー",
               "更新に失敗しました。" + err.message,
@@ -184,7 +184,7 @@ export default {
         },
         error: err => {
           this.isLoading = false;
-          console.error(err);
+          //console.error(err);
           this.$refs.messageDialog.open(
             "エラー",
             "画像更新に失敗しました。" + err.message,
