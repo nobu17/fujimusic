@@ -1,99 +1,78 @@
 <template>
   <div>
-    <v-container :class="{'ma-0 pa-0': $vuetify.breakpoint.smAndDown}">
-      <v-layout wrap>
-        <v-flex v-for="(room,i) in classRooms" :key="i" xs12>
-          <v-flex xs12>
-            <h3 class="title-head text-md-center text-xs-center mt-3 mb-4">
-              <v-icon class="mr-3" color="red" size="45">queue_music</v-icon>
-              {{room.name}}
-            </h3>
-          </v-flex>
-          <v-flex xs12>
-            <v-carousel class="hidden-sm-and-down">
-              <v-carousel-item v-for="(item,i) in room.images" :key="i" :src="item.src"></v-carousel-item>
-            </v-carousel>
-            <v-carousel class="hidden-md-and-up" height="250">
-              <v-carousel-item v-for="(item,i) in room.images" :key="i" :src="item.src"></v-carousel-item>
-            </v-carousel>
-          </v-flex>
-          <v-flex xs12>
-            <h3 class="t-title stripe ma-3 text-md-center text-xs-center">案内</h3>
-            <p
-              :class="{'article_xs ml-3 mb-3 multiLine': $vuetify.breakpoint.smAndDown, 'article ml-5 mb-4 multiLine': $vuetify.breakpoint.mdAndUp}"
-            >{{room.description}}</p>
-          </v-flex>
-          <v-flex xs12>
-            <h3 class="t-title stripe ma-3 text-md-center text-xs-center xs12 md6">時間</h3>
-            <div class="text-md-center text-xs-center mb-5">
-              <p
-                class="time-list text-md-center text-xs-center"
-                v-for="(time,i) in room.lessonTimes"
-                :key="i"
-              >{{time.weekOfDay + " " + time.start + "～" + time.end }}</p>
-            </div>
-          </v-flex>
-          <v-flex xs12>
-            <h3 class="t-title stripe ma-3 text-md-center text-xs-center xs12">練習場所</h3>
-            <p
-              :class="{'article_xs ml-3': $vuetify.breakpoint.smAndDown, 'article ml-5': $vuetify.breakpoint.mdAndUp}"
-            >{{room.locationInfo.address}}</p>
-            <p
-              :class="{'article_xs ml-3': $vuetify.breakpoint.smAndDown, 'article ml-5': $vuetify.breakpoint.mdAndUp}"
-            >{{room.locationInfo.etc}}</p>
-            <v-flex class xs12>
-              <div class="ggmap ml-5" v-html="room.locationInfo.map"></div>
-            </v-flex>
-            <hr class="class_end pt-5">
-          </v-flex>
-        </v-flex>
-      </v-layout>
-    </v-container>
+    <v-flex xs12>
+      <v-flex xs12>
+        <h3 class="title-head text-md-center text-xs-center mt-3 mb-1">
+          <v-icon class="mr-3" color="red" size="45">queue_music</v-icon>三島教室
+        </h3>
+      </v-flex>
+      <v-flex xs12>
+        <LoadingPartialScreen :isLoading="isLoading"/>
+      </v-flex>
+      <ClassInfoDisplay
+        v-if="classInfoList[classIdList[0]]"
+        :classInfo="classInfoList[classIdList[0]]"
+        :mapAddress="mapList[0]"
+      />
+    </v-flex>
+    <v-flex xs12>
+      <v-alert v-if="errorMessage !== ''" :value="true" type="error">{{ errorMessage }}</v-alert>
+    </v-flex>
+    <v-flex xs12>
+      <v-flex xs12>
+        <h3 class="title-head text-md-center text-xs-center mt-3 mb-4">
+          <v-icon class="mr-3" color="red" size="45">queue_music</v-icon>清水教室
+        </h3>
+      </v-flex>
+      <v-flex xs12>
+        <LoadingPartialScreen :isLoading="isLoading"/>
+      </v-flex>
+      <ClassInfoDisplay
+        v-if="classInfoList[classIdList[1]]"
+        :classInfo="classInfoList[classIdList[1]]"
+        :mapAddress="mapList[1]"
+      />
+    </v-flex>
   </div>
 </template>
 <script>
+import LoadingPartialScreen from "../components/common/loadingPartialScreen";
+import ClassInfoDisplay from "../components/classroom/classInfoDisplay";
 export default {
+  components: {
+    LoadingPartialScreen,
+    ClassInfoDisplay
+  },
+  created() {
+    this.isLoading = true;
+    const req = {
+      classIdList: this.classIdList,
+      success: () => {
+        this.isLoading = false;
+      },
+      error: err => {
+        this.isLoading = false;
+        this.errorMessage =
+          "ロードに失敗しました。画面をリロードしてください。" + err.message;
+      }
+    };
+    this.$store.dispatch("classroom/readMultileClass", req);
+  },
+  computed: {
+    // クラス情報(keyが教室ID)
+    classInfoList() {
+      return this.$store.getters["classroom/classInfoList"];
+    }
+  },
   data() {
     return {
-      classRooms: [
-        {
-          name: "三島教室",
-          description:
-            "三島教室は月に3回、2人1組のレッスンになります。\n1回、1時間です。個人レッスンを御希望の方は相談ください。",
-          lessonTimes: [
-            { weekOfDay: "火曜日", start: "19:00", end: "21:00" },
-            { weekOfDay: "水曜日", start: "19:00", end: "21:00" },
-            { weekOfDay: "木曜日", start: "19:00", end: "21:00" },
-            { weekOfDay: "日曜日", start: "09:00", end: "12:00" }
-          ],
-          images: [
-            { src: require("../assets/classroom/mishima1.jpg") },
-            { src: require("../assets/classroom/mishima2.jpg") }
-          ],
-          locationInfo: {
-            address: "静岡県駿東郡長泉町竹原211-30 南部地区センター2F",
-            etc: "※駐車場あり",
-            map:
-              '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3263.477240510063!2d138.89287291524357!3d35.119762280328864!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60199aa4829704d9%3A0x941ace08ced74506!2z44CSNDExLTA5NDQg6Z2Z5bKh55yM6ae_5p2x6YOh6ZW35rOJ55S656u55Y6f77yS77yR77yR4oiS77yT77yQIOmVt-azieeUuuWNl-mDqOWcsOWMuuOCu-ODs-OCv-ODvDLpmo4!5e0!3m2!1sja!2sjp!4v1550762841359" width="800" height="600" frameborder="0" style="border:0" allowfullscreen></iframe>'
-          }
-        },
-        {
-          name: "清水教室",
-          description:
-            "清水教室は月に3回、2人1組のレッスンになります。\n1回、1時間です。個人レッスンを御希望の方は相談ください。",
-          lessonTimes: [{ weekOfDay: "日曜日", start: "15:00", end: "20:00" }],
-          images: [
-            { src: require("../assets/classroom/shimizu1.jpg") },
-            { src: require("../assets/classroom/shimizu2.jpg") }
-          ],
-          locationInfo: {
-            address: "静岡県静岡市清水区八坂2110-2　北部交流センター１F",
-            etc: "※駐車場あり",
-            map:
-              '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3266.6276866031067!2d138.46901731524142!3d35.04104298034855!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601a347b0a0ebed7%3A0x21192d9f12bb8838!2z6Z2Z5bKh5biCIOa4heawtOWMl-mDqOS6pOa1geOCu-ODs-OCv-ODvA!5e0!3m2!1sja!2sjp!4v1551108237512" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>'
-          }
-        }
-      ]
+      classIdList: ["mishima", "shimizu"],
+      isLoading: false,
+      mapList: [
+        '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3263.477240510063!2d138.89287291524357!3d35.119762280328864!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60199aa4829704d9%3A0x941ace08ced74506!2z44CSNDExLTA5NDQg6Z2Z5bKh55yM6ae_5p2x6YOh6ZW35rOJ55S656u55Y6f77yS77yR77yR4oiS77yT77yQIOmVt-azieeUuuWNl-mDqOWcsOWMuuOCu-ODs-OCv-ODvDLpmo4!5e0!3m2!1sja!2sjp!4v1550762841359" width="800" height="600" frameborder="0" style="border:0" allowfullscreen></iframe>',
+        '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3266.6276866031067!2d138.46901731524142!3d35.04104298034855!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601a347b0a0ebed7%3A0x21192d9f12bb8838!2z6Z2Z5bKh5biCIOa4heawtOWMl-mDqOS6pOa1geOCu-ODs-OCv-ODvA!5e0!3m2!1sja!2sjp!4v1551108237512" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>'
+      ],
+      errorMessage : ""
     };
   },
   head: {

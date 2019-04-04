@@ -81,10 +81,11 @@ export default {
         success: () => {
           this.isLoading = false;
         },
-        error: err => {
+        error: async err => {
           this.isLoading = false;
           console.error(err);
-          this.$refs.messageDialog.open("エラー", err.message, "ok");
+          await this.$refs.messageDialog.open("エラー", err.message, "ok");
+          this.$router.push("/admin");
         }
       };
       this.$store.dispatch("classroom/readClass", req);
@@ -146,9 +147,9 @@ export default {
             lessonTimes: this.classInfo.lessonTimes,
             lessonPlace: this.classInfo.lessonPlace
           },
-          success: () => {
+          success: async () => {
             //成功したら画像を上げる
-            this.postImage();
+            await this.postImage();
           },
           error: err => {
             this.isLoading = false;
@@ -167,7 +168,7 @@ export default {
       const req = {
         classId: this.classId,
         imagesFiles: this.classInfo.imageList,
-        success: result => {
+        success: async (result) => {
           this.isLoading = false;
           if (result.failFileList && result.failFileList.length > 0) {
             this.$refs.messageDialog.open(
@@ -177,7 +178,8 @@ export default {
               "ok"
             );
           } else {
-              this.$refs.messageDialog.open("情報", "処理が完了しました。", "ok");
+              await this.$refs.messageDialog.open("情報", "処理が完了しました。", "ok");
+              this.$router.push("/admin");
           }
         },
         error: err => {
@@ -185,7 +187,7 @@ export default {
           console.error(err);
           this.$refs.messageDialog.open(
             "エラー",
-            "更新に失敗しました。" + err.message,
+            "画像更新に失敗しました。" + err.message,
             "ok"
           );
         }

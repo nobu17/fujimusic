@@ -6,10 +6,11 @@ import base64ToBlob from "b64-to-blob";
 export const ClassRoom = {
   namespaced: true,
   state: {
-    classInfoList: {},
+    classInfoList: [],
     currentClassInfo: {}
   },
   getters: {
+    classInfoList: state => state.classInfoList,
     currentClassInfo: state => state.currentClassInfo,
     getClassInfoById: state => classId => {
       return state.classInfoList[classId];
@@ -20,9 +21,44 @@ export const ClassRoom = {
       state.classInfoList[classId] = classInfo;
       //現在のクラスを設定
       state.currentClassInfo = classInfo;
+    },
+    changeClassInfoList(state, { classInfoList }) {
+      state.classInfoList = classInfoList;
     }
   },
   actions: {
+    async readMultileClass(context, { classIdList, success, error }) {
+      try {
+        const result = await api.readClassInfoList(classIdList);
+        console.log("result", result);
+        if (result) {
+          for (const classroom of result) {
+            //画像は3個まで指定
+            if (classroom.imageList.length > 3) {
+              classroom.imageList = result.imageList.slice(0, 2);
+            } else {
+              //ない場合は空のデータを補充
+              const ren = classroom.imageList.length;
+              for (let i = ren; i < 3; i++) {
+                classroom.imageList.push({ fileName: "", fileUrl: "" });
+              }
+            }
+            //データを更新
+            context.commit("addClassInfo", {
+              classId: classroom.classId,
+              classInfo: classroom
+            });
+          }          
+          success();
+          return;
+        }
+        error(new Error("un expected error"));
+      } catch (err) {
+        console.log("api err", err);
+        error(err);
+        return;
+      }
+    },
     async readClass(context, { classId, success, error }) {
       try {
         const result = await api.readClassInfo(classId);
@@ -76,13 +112,19 @@ export const ClassRoom = {
         //既にアップロード済みのものは除外
         if (imageFile.fileUrl && imageFile.fileUrl.startsWith("data")) {
           const fName = classId + "_" + (counter + 1);
-          let extension = imageFile.fileName.split(".").pop().toLowerCase();
-          if(extension === "jpeg") {
-              extension == "jpg";
+          let extension = imageFile.fileName
+            .split(".")
+            .pop()
+            .toLowerCase();
+          if (extension === "jpeg") {
+            extension == "jpg";
           }
           form.append(
             fName,
-            base64ToBlob(imageFile.fileUrl.replace(/^.*,/, ""), "image/"+ extension)
+            base64ToBlob(
+              imageFile.fileUrl.replace(/^.*,/, ""),
+              "image/" + extension
+            )
           );
           addCount++;
         }
@@ -91,7 +133,8 @@ export const ClassRoom = {
       // 新規アップロードが無ければ除外
       if (addCount === 0) {
         console.log("there are no file to upload");
-        success({successFileList :[], failFileList:[]});
+        success({ successFileList: [], failFileList: [] });
+        return;
       }
 
       try {
@@ -113,6 +156,21 @@ export const ClassRoom = {
 class ClassRoomApi extends APIBase {
   constructor() {
     super(AppEnv.classroomApiUrl, AppEnv.classroomApiKey);
+  }
+  async readClassInfoList(classIdList) {
+    const apiQuery = "?classNames=" + classIdList.join(",");
+    try {
+      //console.log("api call");
+      const info = await api.get(apiQuery);
+      console.log("api res", info);
+      if (info.data && info.data.classroomList.length >= 1) {
+        return info.data.classroomList;
+      }
+      return null;
+    } catch (err) {
+      console.log("api error", err);
+      throw new ApiError("api call error", err.response.status);
+    }
   }
   async readClassInfo(classId) {
     const apiQuery = "?classNames=" + classId;
