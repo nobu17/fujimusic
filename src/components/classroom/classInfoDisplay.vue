@@ -9,7 +9,7 @@
                 <v-carousel-item v-if="item.fileUrl" :src="item.fileUrl"></v-carousel-item>
               </div>
             </v-carousel>
-            <v-carousel class="hidden-md-and-up" height="450">
+            <v-carousel class="hidden-md-and-up" height="250">
               <div v-for="(item,i) in classInfo.imageList" :key="i">
                 <v-carousel-item v-if="item.fileUrl" :src="item.fileUrl"></v-carousel-item>
               </div>
