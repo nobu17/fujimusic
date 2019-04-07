@@ -147,6 +147,18 @@
             </v-card-text>
           </v-card>
         </v-flex>
+        <hr class="end mt-5 mb-5">
+        <v-flex class="mt-5" xs12>
+          <a class="exLink" href="http://www.guitar-kyoushitsu.com/">ギター教室navi</a>
+          <a class="exLink" href="http://www.musicschool-navi.com">
+            <img
+              src="http://www.musicschool-navi.com/img/nav_req.jpg"
+              width="200"
+              height="100"
+              alt="掲載教室募集中！音楽教室ナビ"
+            >
+          </a>
+        </v-flex>
       </v-container>
     </v-layout>
   </div>
@@ -185,6 +197,15 @@ export default {
 };
 </script>
 <style>
+.end {
+  border: none;
+  border-top: dashed 3px #ff0000;
+  height: 4px;
+  color: #ffffff;
+}
+.exLink {
+  margin: 10px;
+}
 .article {
   letter-spacing: 4px;
   font-size: 17px;
