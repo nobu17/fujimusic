@@ -5,12 +5,12 @@
         <LoadingPartialScreen :isLoading="isLoading"/>
       </v-flex>
       <v-flex v-if="imageList.length > 0" xs12>
-        <v-carousel class="hidden-sm-and-down" height="500">
+        <v-carousel class="hidden-sm-and-down ma-1" height="500">
           <div v-for="(item,i) in imageList" :key="i">
             <v-carousel-item v-if="item.fileUrl" :src="item.fileUrl"></v-carousel-item>
           </div>
         </v-carousel>
-        <v-carousel class="hidden-md-and-up" height="250">
+        <v-carousel class="hidden-md-and-up ma-1" height="250">
           <div v-for="(item,i) in imageList" :key="i">
             <v-carousel-item v-if="item.fileUrl" :src="item.fileUrl"></v-carousel-item>
           </div>
