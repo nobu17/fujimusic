@@ -35,7 +35,6 @@ export default {
     // トップ画像のロード
     this.isLoading = true;
     const req = {
-      
       success: () => {
         this.isLoading = false;
       },
