@@ -2,7 +2,7 @@
 import { APIBase, ApiError } from "./common/apibase";
 import { AppEnv } from "./common/appenv";
 
-// 認証ストア
+// お知らせストア
 export const Info = {
   namespaced: true,
   state: {

@@ -46,7 +46,11 @@ export default {
     return {
       menuList: [
         { text: "お知らせ管理", icon: "info", link: "/admin/infoedit" },
-        { text: "トップページ画像", icon: "info", link: "/admin/topedit" },
+        {
+          text: "トップページ画像変更",
+          icon: "info",
+          link: "/admin/topimageedit"
+        },
         {
           text: "三島教室の設定",
           icon: "info",

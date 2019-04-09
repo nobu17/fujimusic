@@ -5,4 +5,7 @@ export const AppEnv = {
   infoApiKey: process.env.VUE_APP_INFOAPI_APIKEY,
   classroomApiUrl: process.env.VUE_APP_CLASSROOMAPI_BASEURL,
   classroomApiKey: process.env.VUE_APP_CLASSROOMAPI_APIKEY,
+  topPageApiUrl: process.env.VUE_APP_TOPPAGEAPI_BASEURL,
+  topPageApiKey: process.env.VUE_APP_TOPPAGEAPI_APIKEY,
+  topPageImageBaseUrl: process.env.VUE_APP_TOPPAGE_IMAGE_BASEURL
 };

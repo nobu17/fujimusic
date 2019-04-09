@@ -2,12 +2,22 @@
   <div>
     <v-layout wrap>
       <v-flex xs12>
-        <v-carousel class="pa-2 hidden-sm-and-down">
-          <v-carousel-item v-for="(item,i) in topImages" :key="i" :src="item.src"></v-carousel-item>
+        <LoadingPartialScreen :isLoading="isLoading"/>
+      </v-flex>
+      <v-flex v-if="imageList.length > 0" xs12>
+        <v-carousel class="hidden-sm-and-down"  height="500">
+          <div v-for="(item,i) in imageList" :key="i">
+            <v-carousel-item v-if="item.fileUrl" :src="item.fileUrl"></v-carousel-item>
+          </div>
         </v-carousel>
-        <v-carousel class="pa-2 hidden-md-and-up" height="250">
-          <v-carousel-item v-for="(item,i) in topImages" :key="i" :src="item.src"></v-carousel-item>
+        <v-carousel class="hidden-md-and-up" height="250">
+          <div v-for="(item,i) in imageList" :key="i">
+            <v-carousel-item v-if="item.fileUrl" :src="item.fileUrl"></v-carousel-item>
+          </div>
         </v-carousel>
+      </v-flex>
+      <v-flex v-if="errorMessage !== ''" xs12>
+        <v-alert :value="true" type="error">{{ errorMessage }}</v-alert>
       </v-flex>
       <v-container :class="{'ma-0 pa-0': $vuetify.breakpoint.smAndDown}">
         <v-flex class="pa-3" xs12>
@@ -150,23 +160,44 @@
         <hr class="end mt-5 mb-5">
         <v-flex class="mt-5" xs12>
           <a class="exLink" href="http://www.guitar-kyoushitsu.com/">ギター教室navi</a>
-          <a class="exLink" href="http://www.musicschool-navi.com">
-            <img
-              src="http://www.musicschool-navi.com/img/nav_req.jpg"
-              width="200"
-              height="100"
-              alt="掲載教室募集中！音楽教室ナビ"
-            >
-          </a>
         </v-flex>
       </v-container>
     </v-layout>
   </div>
 </template>
 <script>
+import LoadingPartialScreen from "../components/common/loadingPartialScreen";
 export default {
+  components: {
+    LoadingPartialScreen
+  },
+  created() {
+    // トップ画像のロード
+    this.isLoading = true;
+    const req = {
+      //ロード高速化のため画像の有無はチェックしない
+      isPassCheckUrl: true,
+      success: () => {
+        this.isLoading = false;
+      },
+      error: () => {
+        this.isLoading = false;
+        this.errorMessage =
+          "画像のロードに失敗しました。ページを更新してください。";
+      }
+    };
+    this.$store.dispatch("toppage/loadTopImageList", req);
+  },
+  computed: {
+    // 画像一覧
+    imageList() {
+      return this.$store.getters["toppage/imageList"];
+    }
+  },
   data() {
     return {
+      errorMessage: "",
+      isLoading: false,
       topTitle: "ご挨拶",
       topTitleImage: require("../assets/top/topimage.jpg"),
       topMessage:

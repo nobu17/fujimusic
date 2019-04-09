@@ -8,6 +8,13 @@ export class APIBase {
     }
   }
 
+  async getWithFullUrl(fullUrl) {
+    return await axios.get(fullUrl, {
+      headers: this.getApiKeyHeader(),
+      data: {}
+    });    
+  }
+
   async get(queryUrl) {
     return await axios.get(this.apiUrl + queryUrl, {
       headers: this.getApiKeyHeader(),

@@ -10,6 +10,7 @@ import Students from "./pages/students";
 import AdminIndex from "./pages/admin/index";
 import InfoEdit from "./pages/admin/infoedit";
 import Classedit from "./pages/admin/classedit";
+import TopImageEdit from "./pages/admin/topimageedit";
 import Login from "./pages/login";
 
 Vue.use(VueRouter);
@@ -64,6 +65,13 @@ const router = new VueRouter({
     {
       path: "/admin/infoedit",
       component: InfoEdit,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/admin/topimageedit",
+      component: TopImageEdit,
       meta: {
         requiresAuth: true
       }
