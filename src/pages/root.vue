@@ -5,7 +5,7 @@
         <LoadingPartialScreen :isLoading="isLoading"/>
       </v-flex>
       <v-flex v-if="imageList.length > 0" xs12>
-        <v-carousel class="hidden-sm-and-down"  height="500">
+        <v-carousel class="hidden-sm-and-down" height="500">
           <div v-for="(item,i) in imageList" :key="i">
             <v-carousel-item v-if="item.fileUrl" :src="item.fileUrl"></v-carousel-item>
           </div>
@@ -202,10 +202,6 @@ export default {
       topTitleImage: require("../assets/top/topimage.jpg"),
       topMessage:
         "fujimusic(フジミュージック）ギター教室には、小学生から60代、70代、の幅広い年代の生徒がいます。\nアットホームで気軽に楽しめ、そして、音楽好きな仲間を見つけることができる、そんな教室を目指しています。\nやってみたいけど、踏み出せない、そんなひとはいませんか？\nぜひ一緒に音楽を楽しみましょう！\n\n静岡県東部(沼津市,三島市,長泉町,清水町,裾野市)と、静岡県中部(静岡市清水区,葵区,駿河区)で活動をしています。",
-      topImages: [
-        { src: require("../assets/top/slide0.png") },
-        { src: require("../assets/top/slide1.jpg") }
-      ],
       teacherImage: require("../assets/top/teacher.jpg"),
       teacherProfile:
         "名前：丸山 幸男(まるやま ゆきお)\nフジミュージック代表の丸山です。三島、清水教室のどちらの生徒も楽しみながらレッスンをしています。定期的な発表の場もあるので、飽きずにレッスンを続けることができます。フジミュージックに参加して一緒に楽しみましょう。"
