@@ -3,7 +3,7 @@
     <v-dialog v-model="dialog" width="85%">
       <v-card>
         <v-img :src="imageSrc" aspect-ratio="1.7" ></v-img>
-        <v-card-actions>{{ message }}</v-card-actions>
+        <v-card-actions v-if="message !== ''">{{ message }}</v-card-actions>
       </v-card>
     </v-dialog>
   </v-layout>
