@@ -26,14 +26,6 @@
                 </v-hover>
               </div>
             </v-flex>
-            <v-flex v-for="(album,index) in albums" :key="index" xs12 md6>
-              <v-hover>
-                <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 2}`">
-                  <v-card-title>{{ album.description }}</v-card-title>
-                  <v-img :src="album.thumbnail" aspect-ratio="2" @click="openAlbum(album)"></v-img>
-                </v-card>
-              </v-hover>
-            </v-flex>
           </v-layout>
         </v-container>
       </v-layout>
@@ -80,32 +72,7 @@ export default {
     }
   },
   data() {
-    return {
-      isLoading: false,
-      //albums: [{}],
-      albums: [
-        {
-          albumId: "1",
-          thumbnail: require("../../assets/album/album1.jpg"),
-          description: "2017/4/9 Tommy BirthdayLive"
-        },
-        {
-          albumId: "2",
-          thumbnail: require("../../assets/album/album2.jpg"),
-          description: "2017/5/7 fujimusic concert"
-        },
-        {
-          albumId: "3",
-          thumbnail: require("../../assets/album/album3.jpg"),
-          description: "2017/5/7 fujimusic concert"
-        },
-        {
-          albumId: "4",
-          thumbnail: require("../../assets/album/album4.jpg"),
-          description: "2017/5/7 fujimusic concert"
-        }
-      ]
-    };
+    return {};
   }
 };
 </script>
