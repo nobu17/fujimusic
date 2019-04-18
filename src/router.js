@@ -7,6 +7,8 @@ import Price from "./pages/price";
 import ClassRoom from "./pages/classroom";
 import EventPic from "./pages/event";
 import Students from "./pages/students";
+import AlbumTop from "./pages/member/albumtop";
+import AlbumPage from "./pages/member/albumpage";
 import AdminIndex from "./pages/admin/index";
 import InfoEdit from "./pages/admin/infoedit";
 import Classedit from "./pages/admin/classedit";
@@ -56,31 +58,49 @@ const router = new VueRouter({
       component: Login
     },
     {
+      path: "/member/albumtop",
+      component: AlbumTop,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/member/albumpage/:albumId",
+      component: AlbumPage,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
       path: "/admin",
       component: AdminIndex,
       meta: {
-        requiresAuth: true
+        requiresAuth: true,
+        requiresAdmin: true
       }
     },
     {
       path: "/admin/infoedit",
       component: InfoEdit,
       meta: {
-        requiresAuth: true
+        requiresAuth: true,
+        requiresAdmin: true
       }
     },
     {
       path: "/admin/topimageedit",
       component: TopImageEdit,
       meta: {
-        requiresAuth: true
+        requiresAuth: true,
+        requiresAdmin: true
       }
     },
     {
       path: "/admin/classedit/:classId",
       component: Classedit,
       meta: {
-        requiresAuth: true
+        requiresAuth: true,
+        requiresAdmin: true
       }
     }
   ]
@@ -88,8 +108,8 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   // 認証状態を取得
-  let isLoggedIn = store.state.auth.isLoggedIn;
-
+  const isLoggedIn = store.state.auth.isLoggedIn;
+  const isAdmin = store.getters["auth/isAdmin"];
   // ログイン状態でログアウト
   if (isLoggedIn && to.path === "/logout") {
     store.dispatch("auth/logout");
@@ -110,6 +130,14 @@ router.beforeEach((to, from, next) => {
     });
   } else if (to.fullPath === "/login" && isLoggedIn) {
     //ログイン中でログイン先に来たら自動ログイン
+    next({
+      path: "/"
+    });
+  } // 管理権限ページ
+  else if (
+    to.matched.some(record => record.meta.requiresAdmin) &&
+    (!isAdmin || !isLoggedIn)
+  ) {
     next({
       path: "/"
     });
