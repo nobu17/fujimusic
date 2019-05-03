@@ -22,7 +22,7 @@
             <v-flex v-for="(image,index) in displayAlbumInfo.imageList" :key="index" xs12 md6>
               <v-hover>
                 <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 2}`">
-                  <v-img :src="image" aspect-ratio="2" @click="openImage(image)"></v-img>
+                  <v-img :src="image.fileUrl" aspect-ratio="2" @click="openImage(image)"></v-img>
                 </v-card>
               </v-hover>
             </v-flex>
@@ -66,7 +66,11 @@ export default {
   computed: {
     // アルバム一覧
     displayAlbumInfo() {
-      return this.$store.getters["album/displayAlbumInfo"];
+      const disp = this.$store.getters["album/displayAlbumInfo"];
+      if(disp) {
+        disp.imageList = disp.imageList.filter(el => el.fileUrl !== "");
+      }
+      return disp;
     }
   },
   methods: {

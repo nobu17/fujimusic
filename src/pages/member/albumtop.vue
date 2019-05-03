@@ -21,7 +21,7 @@
                 <v-hover>
                   <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 2}`">
                     <v-card-title>{{ album.eventDateStr }} {{ album.title }}</v-card-title>
-                    <v-img :src="album.thumbnail" aspect-ratio="2" @click="openAlbum(album)"></v-img>
+                    <v-img :src="album.thumbnail.fileUrl" aspect-ratio="2" @click="openAlbum(album)"></v-img>
                   </v-card>
                 </v-hover>
               </div>

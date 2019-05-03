@@ -52,6 +52,11 @@ export default {
           link: "/admin/topimageedit"
         },
         {
+          text: "アルバム管理",
+          icon: "info",
+          link: "/admin/albumedit/edittop"
+        },
+        {
           text: "三島教室の設定",
           icon: "info",
           link: "/admin/classedit/mishima"

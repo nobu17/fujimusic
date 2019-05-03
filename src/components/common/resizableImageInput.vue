@@ -14,8 +14,13 @@
         <v-flex xs2>
           <v-btn color="info" @click="pickFile" :disabled="disabled">アップロード</v-btn>
         </v-flex>
-        <v-flex xs10>
+        <v-flex xs7>
           <v-text-field label="アップロードボタンを押下してください。" readonly v-model="imageName"></v-text-field>
+        </v-flex>
+        <v-flex xs3 v-if="canDelete">
+          <v-btn outline fab color="red" @click="deleteClicked" :disabled="disabled">
+            <v-icon>delete_forever</v-icon>
+          </v-btn>
         </v-flex>
       </v-layout>
     </v-container>
@@ -32,6 +37,11 @@ export default {
     imageName: {
       type: String,
       required: true
+    },
+    canDelete: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   mounted() {},
@@ -44,6 +54,9 @@ export default {
   methods: {
     pickFile() {
       this.$refs.input.click();
+    },
+    deleteClicked() {
+      this.$emit("deleteClicked");
     },
     resize() {
       this.disabled = true;

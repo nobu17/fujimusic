@@ -8,7 +8,7 @@
           </h3>
         </v-flex>
         <v-flex xs12>
-          <h3 class="t-title stripe ma-3">案内</h3>
+          <h3 class="t-title stripe text-xs-center ma-3">案内</h3>
           <p class="article ml-5 multiLine">フジミュージックのイベント時の写真を紹介します。画像をクリックすると拡大します。</p>
         </v-flex>
         <v-container fluid grid-list-md>

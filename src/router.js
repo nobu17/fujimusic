@@ -13,6 +13,8 @@ import AdminIndex from "./pages/admin/index";
 import InfoEdit from "./pages/admin/infoedit";
 import Classedit from "./pages/admin/classedit";
 import TopImageEdit from "./pages/admin/topimageedit";
+import AlbumEditTop from "./pages/admin/albumedit/edittop";
+import AlbumEditPage from "./pages/admin/albumedit/editpage";
 import Login from "./pages/login";
 
 Vue.use(VueRouter);
@@ -98,6 +100,22 @@ const router = new VueRouter({
     {
       path: "/admin/classedit/:classId",
       component: Classedit,
+      meta: {
+        requiresAuth: true,
+        requiresAdmin: true
+      }
+    },
+    {
+      path: "/admin/albumedit/edittop",
+      component: AlbumEditTop,
+      meta: {
+        requiresAuth: true,
+        requiresAdmin: true
+      }
+    },
+    {
+      path: "/admin/albumedit/edit/:albumId",
+      component: AlbumEditPage,
       meta: {
         requiresAuth: true,
         requiresAdmin: true

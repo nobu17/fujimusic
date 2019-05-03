@@ -12,7 +12,7 @@ export class APIBase {
     return await axios.get(fullUrl, {
       headers: this.getApiKeyHeader(),
       data: {}
-    });    
+    });
   }
 
   async get(queryUrl) {
@@ -26,6 +26,13 @@ export class APIBase {
     return await axios.post(this.apiUrl, param, {
       headers: this.getApiKeyHeader()
     });
+  }
+
+  async delete(param) {
+    const request = axios.create({
+      headers: this.getApiKeyHeader()
+    });
+    return await request.delete(this.apiUrl, { data: param });
   }
 
   async postWithMultiPartData(param) {
