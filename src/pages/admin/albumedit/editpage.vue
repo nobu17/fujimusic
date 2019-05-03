@@ -108,7 +108,7 @@ export default {
       this.albumId = this.$route.params.albumId;
       // albumIdがない場合は新規
       if (this.albumId) {
-        console.log("para", this.$route.params);
+        //console.log("para", this.$route.params);
         const req = {
           albumId: this.albumId,
           isForceCacheOff: true,
@@ -122,7 +122,7 @@ export default {
             this.isLoading = false;
             await this.$refs.messageDialog.open(
               "エラー",
-              "ロードに失敗しました。画面をリロードしてください",
+              "ロードに失敗しました。画面をリロードしてください、" ,
               "ok"
             );
           }

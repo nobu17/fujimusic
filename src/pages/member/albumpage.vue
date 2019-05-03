@@ -50,7 +50,7 @@ export default {
       albumId: this.albumId,
       success: () => {
         this.isLoading = false;
-        console.log("disp", this.displayAlbumInfo);
+        //console.log("disp", this.displayAlbumInfo);
       },
       error: async err => {
         this.isLoading = false;
