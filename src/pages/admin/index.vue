@@ -75,7 +75,7 @@ export default {
 <style scoped>
 .menuTitle {
   letter-spacing: 2px;
-  font-size: 25px;
+  font-size: 20px;
   line-height: 35px;
   background-color: transparent;
 }

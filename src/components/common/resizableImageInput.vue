@@ -11,13 +11,13 @@
     >
     <v-container class="mt-0 mb-0">
       <v-layout wrap>
-        <v-flex xs2>
+        <v-flex xs12 md2>
           <v-btn color="info" @click="pickFile" :disabled="disabled">アップロード</v-btn>
         </v-flex>
-        <v-flex xs7>
+        <v-flex xs9 md7>
           <v-text-field label="アップロードボタンを押下してください。" readonly v-model="imageName"></v-text-field>
         </v-flex>
-        <v-flex xs3 v-if="canDelete">
+        <v-flex xs3 md3 v-if="canDelete">
           <v-btn outline fab color="red" @click="deleteClicked" :disabled="disabled">
             <v-icon>delete_forever</v-icon>
           </v-btn>
