@@ -9,7 +9,7 @@
         </v-flex>
         <v-flex xs12>
           <h3 class="t-title text-xs-center stripe ma-3">一覧</h3>
-          <p class="article ml-5 multiLine">フジミュージックの過去イベント写真です。画像を選択すると写真が全て表示されます。</p>
+          <p class="article ml-2 multiLine">フジミュージックの過去イベント写真です。画像を選択すると写真が全て表示されます。</p>
         </v-flex>
         <v-flex xs12>
           <LoadingPartialScreen :isLoading="isLoading"/>
