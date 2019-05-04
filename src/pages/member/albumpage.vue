@@ -77,7 +77,7 @@ export default {
     // 画像表示DLG
     async openImage(image) {
       // 表示
-      await this.$refs.imageDialog.open(image);
+      await this.$refs.imageDialog.open("", image.fileUrl);
     },
     changeAlbumTop() {
       this.$router.push("/member/albumtop");

@@ -2,7 +2,7 @@
   <v-layout row justify-center>
     <v-dialog v-model="dialog" width="85%">
       <v-card>
-        <v-img :src="imageSrc" aspect-ratio="1.7" ></v-img>
+        <v-img :src="imageSrc" contain max-height="750" max-widh="800"></v-img>
         <v-card-actions v-if="message !== ''">{{ message }}</v-card-actions>
       </v-card>
     </v-dialog>

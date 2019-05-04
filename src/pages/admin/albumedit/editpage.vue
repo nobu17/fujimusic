@@ -122,7 +122,7 @@ export default {
             this.isLoading = false;
             await this.$refs.messageDialog.open(
               "エラー",
-              "ロードに失敗しました。画面をリロードしてください、" ,
+              "更新に失敗しました。" ,
               "ok"
             );
           }

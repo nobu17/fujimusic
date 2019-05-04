@@ -21,7 +21,7 @@
               :type="'password'"
               v-model="userModel.password"
               :rules="passRules"
-              :counter="10"
+              :counter="20"
               label="Password"
               v-on:keyup.enter="submit"
               required
