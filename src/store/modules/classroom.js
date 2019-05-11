@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { APIBase, ApiError } from "./common/apibase";
 import { AppEnv } from "./common/appenv";
+import firebase from "../../firebase/index";
 import base64ToBlob from "b64-to-blob";
 // 教室情報
 export const ClassRoom = {
@@ -159,36 +160,46 @@ export const ClassRoom = {
 class ClassRoomApi extends APIBase {
   constructor() {
     super(AppEnv.classroomApiUrl, AppEnv.classroomApiKey);
+    this.database = firebase.firestore();
   }
   async readClassInfoList(classIdList) {
-    const apiQuery = "?classNames=" + classIdList.join(",");
+    const classInfoList = [];
     try {
-      //console.log("api call");
-      const info = await api.get(apiQuery);
-      console.log("api res", info);
-      if (info.data && info.data.classroomList.length >= 1) {
-        return info.data.classroomList;
+      for (const claId of classIdList) {
+        const info = await this.readClassInfoFromStore(claId);
+        if (info) {
+          classInfoList.push(info);
+        } else {
+          console.error("error there is no class:" + claId);
+        }
       }
-      return null;
+      return classInfoList;
     } catch (err) {
       console.log("api error", err);
       throw new ApiError("api call error", err.response.status);
     }
   }
   async readClassInfo(classId) {
-    const apiQuery = "?classNames=" + classId;
     try {
-      //console.log("api call");
-      const info = await api.get(apiQuery);
+      const info = await this.readClassInfoFromStore(classId);
       console.log("api res", info);
-      if (info.data && info.data.classroomList.length >= 1) {
-        return info.data.classroomList[0];
-      }
-      return null;
+      return info;
     } catch (err) {
       console.log("api error", err);
       throw new ApiError("api call error", err.response.status);
     }
+  }
+  async readClassInfoFromStore(classId) {
+    const ref = await this.database
+      .collection("classRoomInfo")
+      .doc(classId)
+      .get();
+    if (ref.exists) {
+      let temp = ref.data();
+      temp.classId = ref.id;
+      return temp;
+    }
+    return null;
   }
   async postClassInfo(classInfo) {
     const classList = { classList: [classInfo] };
