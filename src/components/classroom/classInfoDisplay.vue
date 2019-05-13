@@ -30,7 +30,7 @@
           <v-flex xs12>
             <h3 class="t-title stripe ma-3 text-md-center text-xs-center xs12">練習場所</h3>
             <p
-              :class="{'article_xs ml-3': $vuetify.breakpoint.smAndDown, 'article ml-5': $vuetify.breakpoint.mdAndUp}"
+              :class="{'article_xs ml-3 multiLine': $vuetify.breakpoint.smAndDown, 'article ml-5 multiLine': $vuetify.breakpoint.mdAndUp}"
             >{{classInfo.lessonPlace}}</p>
             <v-flex class xs12>
               <div class="ggmap mr-2" v-html="mapAddress"></div>

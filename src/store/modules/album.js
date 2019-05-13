@@ -4,6 +4,7 @@ import { AppEnv } from "./common/appenv";
 //import { AppEnv } from "./common/appenv";
 import firebase from "../../firebase/index";
 import base64ToBlob from "b64-to-blob";
+import ImageUtil from "../../util/imageUtil";
 
 // アルバムストア
 export const Album = {
@@ -236,7 +237,7 @@ export class AlbumApi extends APIBase {
 
       temp.thumbnail = {
         fileName: "thumb.jpg",
-        fileUrl: this.getUrl(isForceCacheOff, temp.thumbnail)
+        fileUrl: ImageUtil.getUrl(isForceCacheOff, temp.thumbnail)
       };
 
       // ファイル名は自動付与
@@ -245,7 +246,7 @@ export class AlbumApi extends APIBase {
       for (const image of temp.imageList) {
         altImageList.push({
           fileName: count + ".jpg",
-          fileUrl: this.getUrl(isForceCacheOff, image)
+          fileUrl: ImageUtil.getUrl(isForceCacheOff, image)
         });
         count++;
       }
@@ -279,16 +280,6 @@ export class AlbumApi extends APIBase {
       console.log("api error", err);
       throw new ApiError("api call error", err.response.status);
     }
-  }
-  // キャッシュ無効化用にランダム値を付与したURLを取得
-  getUrl(isForceCacheOff, url) {
-    if (isForceCacheOff) {
-      return url + "&rand=" + this.getRandomInt();
-    }
-    return url;
-  }
-  getRandomInt() {
-    return Math.floor(Math.random() * Math.floor(9999));
   }
 }
 

@@ -47,6 +47,7 @@ export default {
     this.isLoading = true;
     const req = {
       classIdList: this.classIdList,
+      isForceCacheClear: false,
       success: () => {
         this.isLoading = false;
       },

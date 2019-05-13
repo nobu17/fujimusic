@@ -4,6 +4,7 @@ import { AppEnv } from "./common/appenv";
 import firebase from "../../firebase/index";
 import base64ToBlob from "b64-to-blob";
 import StringUtil from "../../util/stringUtil";
+import ImageUtil from "../../util/imageUtil";
 
 // 教室情報
 export const ClassRoom = {
@@ -33,9 +34,9 @@ export const ClassRoom = {
     }
   },
   actions: {
-    async readMultileClass(context, { classIdList, success, error }) {
+    async readMultileClass(context, { classIdList, isForceCacheClear, success, error }) {
       try {
-        const result = await api.readClassInfoList(classIdList);
+        const result = await api.readClassInfoList(classIdList, isForceCacheClear);
         console.log("result", result);
         if (result) {
           for (const classroom of result) {
@@ -65,9 +66,9 @@ export const ClassRoom = {
         return;
       }
     },
-    async readClass(context, { classId, success, error }) {
+    async readClass(context, { classId, isForceCacheClear, success, error }) {
       try {
-        const result = await api.readClassInfo(classId);
+        const result = await api.readClassInfo(classId, isForceCacheClear);
         //console.log("result", result);
         if (result) {
           //画像は3個まで指定
@@ -164,11 +165,11 @@ class ClassRoomApi extends APIBase {
     super(AppEnv.classroomApiUrl, AppEnv.classroomApiKey);
     this.database = firebase.firestore();
   }
-  async readClassInfoList(classIdList) {
+  async readClassInfoList(classIdList, isForceCacheClear) {
     const classInfoList = [];
     try {
       for (const claId of classIdList) {
-        const info = await this.readClassInfoFromStore(claId);
+        const info = await this.readClassInfoFromStore(claId, isForceCacheClear);
         if (info) {
           classInfoList.push(info);
         } else {
@@ -181,9 +182,9 @@ class ClassRoomApi extends APIBase {
       throw new ApiError("api call error", err.response.status);
     }
   }
-  async readClassInfo(classId) {
+  async readClassInfo(classId, isForceCacheClear) {
     try {
-      const info = await this.readClassInfoFromStore(classId);
+      const info = await this.readClassInfoFromStore(classId, isForceCacheClear);
       console.log("api res", info);
       return info;
     } catch (err) {
@@ -191,7 +192,10 @@ class ClassRoomApi extends APIBase {
       throw new ApiError("api call error", err.response.status);
     }
   }
-  async readClassInfoFromStore(classId) {
+  async readClassInfoFromStore(classId, isForceCacheClear) {
+    if(!isForceCacheClear) {
+      isForceCacheClear = false;
+    }
     const ref = await this.database
       .collection("classRoomInfo")
       .doc(classId)
@@ -204,7 +208,7 @@ class ClassRoomApi extends APIBase {
       for (let i = 0; i < temp.imageList.length; i++) {
         temp.imageList[i] = {
           fileName: (i + 1).toString() + ".jpg",
-          fileUrl: temp.imageList[i]
+          fileUrl: ImageUtil.getUrl(isForceCacheClear, temp.imageList[i])
         };
       }
       // replace new line for filestore
