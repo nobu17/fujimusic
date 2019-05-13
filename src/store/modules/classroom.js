@@ -3,6 +3,8 @@ import { APIBase, ApiError } from "./common/apibase";
 import { AppEnv } from "./common/appenv";
 import firebase from "../../firebase/index";
 import base64ToBlob from "b64-to-blob";
+import StringUtil from "../../util/stringUtil";
+
 // 教室情報
 export const ClassRoom = {
   namespaced: true,
@@ -197,11 +199,33 @@ class ClassRoomApi extends APIBase {
     if (ref.exists) {
       let temp = ref.data();
       temp.classId = ref.id;
+
+      // change the url to obj
+      for (let i = 0; i < temp.imageList.length; i++) {
+        temp.imageList[i] = {
+          fileName: (i + 1).toString() + ".jpg",
+          fileUrl: temp.imageList[i]
+        };
+      }
+      // replace new line for filestore
+      temp.description = StringUtil.decodeStringForFileStore(temp.description);
+      temp.lessonTimes = StringUtil.decodeStringForFileStore(temp.lessonTimes);
+      temp.lessonPlace = StringUtil.decodeStringForFileStore(temp.lessonPlace);
       return temp;
     }
     return null;
   }
   async postClassInfo(classInfo) {
+    // replace new line for store filestore
+    classInfo.description = StringUtil.decodeStringForFileStore(
+      classInfo.description
+    );
+    classInfo.lessonTimes = StringUtil.decodeStringForFileStore(
+      classInfo.lessonTimes
+    );
+    classInfo.lessonPlace = StringUtil.decodeStringForFileStore(
+      classInfo.lessonPlace
+    );
     const classList = { classList: [classInfo] };
     try {
       console.log("api call", classList);
