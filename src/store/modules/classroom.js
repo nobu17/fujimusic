@@ -217,13 +217,13 @@ class ClassRoomApi extends APIBase {
   }
   async postClassInfo(classInfo) {
     // replace new line for store filestore
-    classInfo.description = StringUtil.decodeStringForFileStore(
+    classInfo.description = StringUtil.encodeStringForFileStore(
       classInfo.description
     );
-    classInfo.lessonTimes = StringUtil.decodeStringForFileStore(
+    classInfo.lessonTimes = StringUtil.encodeStringForFileStore(
       classInfo.lessonTimes
     );
-    classInfo.lessonPlace = StringUtil.decodeStringForFileStore(
+    classInfo.lessonPlace = StringUtil.encodeStringForFileStore(
       classInfo.lessonPlace
     );
     const classList = { classList: [classInfo] };
