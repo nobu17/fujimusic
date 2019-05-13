@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-scroll="onScroll">
     <v-container :class="{'ma-0 pa-0': $vuetify.breakpoint.smAndDown}">
       <v-layout justify-center wrap v-if="displayAlbumInfo">
         <v-layout wrap>
@@ -30,6 +30,24 @@
         </v-container>
       </v-layout>
     </v-container>
+    <div>
+      <v-fab-transition>
+        <v-btn
+          v-show="scrollButtonDisplied"
+          class="topButton"
+          color="pink"
+          dark
+          fixed
+          absolute
+          bottom
+          right
+          fab
+          @click="scrollTop()"
+        >
+          <v-icon>keyboard_arrow_up</v-icon>
+        </v-btn>
+      </v-fab-transition>
+    </div>
     <ImageDialog ref="imageDialog"/>
     <MessageDialog ref="messageDialog"/>
   </div>
@@ -67,7 +85,7 @@ export default {
     // アルバム一覧
     displayAlbumInfo() {
       const disp = this.$store.getters["album/displayAlbumInfo"];
-      if(disp) {
+      if (disp) {
         disp.imageList = disp.imageList.filter(el => el.fileUrl !== "");
       }
       return disp;
@@ -81,10 +99,22 @@ export default {
     },
     changeAlbumTop() {
       this.$router.push("/member/albumtop");
+    },
+    onScroll() {
+      const top = window.pageYOffset;
+      if (top > 250) {
+        this.scrollButtonDisplied = true;
+      } else {
+        this.scrollButtonDisplied = false;
+      }
+    },
+    scrollTop() {
+      window.scrollTo(0, 0);
     }
   },
   data() {
     return {
+      scrollButtonDisplied: false,
       isLoading: false,
       albumId: "",
       album: {
