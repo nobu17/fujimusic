@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "b64-to-blob": "^1.2.19",
+    "browser-image-compression": "^1.0.5",
     "firebase": "^5.9.4",
     "npm": "^6.8.0",
     "vue": "^2.6.6",
