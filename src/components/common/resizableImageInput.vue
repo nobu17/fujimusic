@@ -28,12 +28,9 @@
 </template>
 
 <script>
+import ImageUtil from '../../util/imageUtil'
 export default {
   props: {
-    drawImageArgs: {
-      type: Function,
-      required: true
-    },
     imageName: {
       type: String,
       required: true
@@ -58,7 +55,7 @@ export default {
     deleteClicked() {
       this.$emit("deleteClicked");
     },
-    resize() {
+    async resize() {
       this.disabled = true;
       this.$emit("disabledChanged", this.disabled);
       const file = this.$refs.input.files[0];
@@ -66,40 +63,15 @@ export default {
       if (!file) {
         return;
       }
+      const base64 = await ImageUtil.getCompressImageDataUrl(file)
+      const imageName = file.name
+      this.$emit('resized', {
+        base64,
+        imageName
+      })
+      this.disabled = false
+      this.$emit('disabledChanged', this.disabled)
 
-      //this.imageName = file.name;
-      const reader = new FileReader();
-
-      reader.onload = event => {
-        const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d");
-        const image = new Image();
-        image.crossOrigin = "Anonymous";
-
-        image.onload = () => {
-          const drawImageArgs = this.drawImageArgs(image);
-
-          if (drawImageArgs.length === 9) {
-            canvas.width = drawImageArgs[7];
-            canvas.height = drawImageArgs[8];
-          }
-
-          ctx.drawImage(...drawImageArgs);
-
-          const base64 = canvas.toDataURL();
-          const imageName = file.name;
-          this.$emit("resized", {
-            base64,
-            imageName
-          });
-          this.disabled = false;
-          this.$emit("disabledChanged", this.disabled);
-        };
-
-        image.src = event.target.result;
-      };
-
-      reader.readAsDataURL(file);
     }
   }
 };
