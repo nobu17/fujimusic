@@ -58,7 +58,6 @@ export default {
       this.$emit("deleteClicked");
     },
     async resize() {
-      console.log("call resized!!!!!");
       this.disabled = true;
       this.$emit("disabledChanged", this.disabled);
       const file = this.$refs.input.files[0];
