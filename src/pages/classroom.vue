@@ -102,7 +102,7 @@ export default {
       classIdList: ["mishima", "shimizu"],
       isLoading: false,
       mapList: [
-        '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3263.477240510063!2d138.89287291524357!3d35.119762280328864!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60199aa4829704d9%3A0x941ace08ced74506!2z44CSNDExLTA5NDQg6Z2Z5bKh55yM6ae_5p2x6YOh6ZW35rOJ55S656u55Y6f77yS77yR77yR4oiS77yT77yQIOmVt-azieeUuuWNl-mDqOWcsOWMuuOCu-ODs-OCv-ODvDLpmo4!5e0!3m2!1sja!2sjp!4v1550762841359" width="800" height="600" frameborder="0" style="border:0" allowfullscreen></iframe>',
+        '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3263.4748489019794!2d138.8928783152435!3d35.11982198032903!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60199aa48290b123%3A0x257af58e66246c58!2z6ZW35rOJ55S6IOWNl-mDqOWcsOWMuuOCu-ODs-OCv-ODvA!5e0!3m2!1sja!2sjp!4v1560262537319!5m2!1sja!2sjp" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>',
         '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3266.6276866031067!2d138.46901731524142!3d35.04104298034855!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601a347b0a0ebed7%3A0x21192d9f12bb8838!2z6Z2Z5bKh5biCIOa4heawtOWMl-mDqOS6pOa1geOCu-ODs-OCv-ODvA!5e0!3m2!1sja!2sjp!4v1551108237512" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>'
       ],
       errorMessage: ""
