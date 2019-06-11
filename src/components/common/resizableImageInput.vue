@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import ImageUtil from '../../util/imageUtil'
+import ImageUtil from "../../util/imageUtil";
 export default {
   props: {
     imageName: {
@@ -53,9 +53,12 @@ export default {
       this.$refs.input.click();
     },
     deleteClicked() {
+      // valueをnullにしないと一度アップロードしたファイルがアップロード不可になる
+      this.$refs.input.value = null;
       this.$emit("deleteClicked");
     },
     async resize() {
+      console.log("call resized!!!!!");
       this.disabled = true;
       this.$emit("disabledChanged", this.disabled);
       const file = this.$refs.input.files[0];
@@ -63,15 +66,14 @@ export default {
       if (!file) {
         return;
       }
-      const base64 = await ImageUtil.getCompressImageDataUrl(file)
-      const imageName = file.name
-      this.$emit('resized', {
+      const base64 = await ImageUtil.getCompressImageDataUrl(file);
+      const imageName = file.name;
+      this.$emit("resized", {
         base64,
         imageName
-      })
-      this.disabled = false
-      this.$emit('disabledChanged', this.disabled)
-
+      });
+      this.disabled = false;
+      this.$emit("disabledChanged", this.disabled);
     }
   }
 };
